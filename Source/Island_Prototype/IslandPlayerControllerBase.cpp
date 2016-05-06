@@ -45,3 +45,42 @@ float AIslandPlayerControllerBase::GetObjectScreenRadius(AActor* InActor)
 
 	return ScreenRadius;
 }
+
+
+FBox2D AIslandPlayerControllerBase::GetObjectScreenBounds(AActor* InActor)
+{
+	//The Actor Bounds Point Mapping
+	const FVector BoundsPointMapping[8] =
+	{
+		FVector(1, 1, 1),
+		FVector(1, 1, -1),
+		FVector(1, -1, 1),
+		FVector(1, -1, -1),
+		FVector(-1, 1, 1),
+		FVector(-1, 1, -1),
+		FVector(-1, -1, 1),
+		FVector(-1, -1, -1)
+	};
+	//Get Actor Bounds    casting to base class, checked by template in the .h
+	const FBox EachActorBounds = InActor->GetComponentsBoundingBox(false); /* All Components */
+
+	//Center
+	const FVector BoxCenter = EachActorBounds.GetCenter();
+
+	//Extents
+	const FVector BoxExtents = EachActorBounds.GetExtent();
+
+	// Build 2D bounding box of actor in screen spacesa
+	FBox2D ActorBox2D(0);
+	for (uint8 BoundsPointItr = 0; BoundsPointItr < 8; BoundsPointItr++)
+	{
+		// Project vert into screen space.
+		//const FVector ProjectedWorldLocation = Project(BoxCenter + (BoundsPointMapping[BoundsPointItr] * BoxExtents));
+		FVector2D ProjectedWorldLocation;
+		ProjectWorldLocationToScreen(BoxCenter + (BoundsPointMapping[BoundsPointItr] * BoxExtents), ProjectedWorldLocation);
+
+		// Add to 2D bounding box
+		ActorBox2D += FVector2D(ProjectedWorldLocation.X, ProjectedWorldLocation.Y);
+	}
+	return ActorBox2D;
+}

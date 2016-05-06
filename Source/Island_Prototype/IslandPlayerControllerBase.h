@@ -19,4 +19,7 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Hud")
 	float GetObjectScreenRadius(AActor* InActor);
 
+	UFUNCTION(BlueprintPure, Category = "Hud")
+	FBox2D GetObjectScreenBounds(AActor* InActor);
+
 };
