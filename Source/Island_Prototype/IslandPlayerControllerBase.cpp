@@ -49,6 +49,12 @@ float AIslandPlayerControllerBase::GetObjectScreenRadius(AActor* InActor)
 
 FBox2D AIslandPlayerControllerBase::GetObjectScreenBounds(AActor* InActor)
 {
+	// Build 2D bounding box of actor in screen spacesa
+	FBox2D ActorBox2D(0);
+	if (!InActor)
+	{
+		return ActorBox2D;
+	}
 	//The Actor Bounds Point Mapping
 	const FVector BoundsPointMapping[8] =
 	{
@@ -70,8 +76,7 @@ FBox2D AIslandPlayerControllerBase::GetObjectScreenBounds(AActor* InActor)
 	//Extents
 	const FVector BoxExtents = EachActorBounds.GetExtent();
 
-	// Build 2D bounding box of actor in screen spacesa
-	FBox2D ActorBox2D(0);
+	
 	for (uint8 BoundsPointItr = 0; BoundsPointItr < 8; BoundsPointItr++)
 	{
 		// Project vert into screen space.
