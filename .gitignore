@@ -37,8 +37,6 @@
 *.sdf
 *.sln
 
-*.db
-
 # Precompiled Assets
 SourceArt/**/*.png
 SourceArt/**/*.tga
