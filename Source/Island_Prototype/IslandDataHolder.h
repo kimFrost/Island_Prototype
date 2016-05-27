@@ -23,7 +23,61 @@ enum class ETileActions : uint8
 };
 
 
+//~~~~~ STRUCTS ~~~~~//
+
+USTRUCT(BlueprintType)
+struct FST_Rating
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Rating(FString Title = "", int32 Rating = 0)
+		: Title(Title)
+		, Rating(Rating)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	int32 Rating;
+};
+
+
 //~~~~~ DATA IMPORT ~~~~~//
+
+USTRUCT(BlueprintType)
+struct FST_Trait : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Trait(FString Id = "", FString Description = "", int32 Rating = 0)
+		: Id(Id)
+		, Description(Description)
+		, Rating(Rating)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	FString Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	FString Description;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	int32 Rating;
+};
+
+//FST_Trait(FString Id = "", FString Description = "", FST_Rating Rating = FST_Rating())
+
+
+USTRUCT(BlueprintType)
+struct FST_Profession : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Profession(FString Id = "", FString Description = "")
+		: Id(Id)
+		, Description(Description)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	FString Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	FString Description;
+};
 
 /*
 USTRUCT(BlueprintType)
@@ -43,7 +97,7 @@ public:
 */
 
 
-//~~~~~ STRUCTS ~~~~~//
+
 
 /*
 USTRUCT(BlueprintType)
