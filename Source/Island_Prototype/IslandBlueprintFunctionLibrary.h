@@ -23,6 +23,6 @@ class ISLAND_PROTOTYPE_API UIslandBlueprintFunctionLibrary : public UBlueprintFu
 	
 public:
 	UFUNCTION(BlueprintCallable, Category = "Util", Meta = (ExpandEnumAsExecs = "Branches"))
-	static void NotNull(AActor* Actor, TEnumAsByte<EBoolGateEnum>& Branches);
+	static void NotNull(UObject* Object, TEnumAsByte<EBoolGateEnum>& Branches);
 	
 };

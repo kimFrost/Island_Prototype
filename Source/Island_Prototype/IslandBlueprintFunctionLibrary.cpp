@@ -7,9 +7,9 @@
 
 
 /******************** NotNull *************************/
-void UIslandBlueprintFunctionLibrary::NotNull(AActor* Actor, TEnumAsByte<EBoolGateEnum>& Branches)
+void UIslandBlueprintFunctionLibrary::NotNull(UObject* Object, TEnumAsByte<EBoolGateEnum>& Branches)
 {
-	if (Actor)
+	if (Object != nullptr)
 	{
 		Branches = EBoolGateEnum::Exits;
 	}
