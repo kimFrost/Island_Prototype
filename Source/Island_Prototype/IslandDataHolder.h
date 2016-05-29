@@ -79,6 +79,26 @@ public:
 	FString Description;
 };
 
+
+USTRUCT(BlueprintType)
+struct FST_Item : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Item(FString Id = "", FString Title = "", FString Description = "")
+		: Id(Id)
+		: Title(Title)
+		, Description(Description)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	FString Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	FString Description;
+};
+
+
 /*
 USTRUCT(BlueprintType)
 struct FST_Stat : public FTableRowBase
