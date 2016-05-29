@@ -87,7 +87,7 @@ struct FST_Item : public FTableRowBase
 public:
 	FST_Item(FString Id = "", FString Title = "", FString Description = "")
 		: Id(Id)
-		: Title(Title)
+		, Title(Title)
 		, Description(Description)
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
