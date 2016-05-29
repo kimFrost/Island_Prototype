@@ -34,9 +34,9 @@ public:
 		: Title(Title)
 		, Rating(Rating)
 	{}
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rating")
 	FString Title;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rating")
 	int32 Rating;
 };
 
@@ -53,11 +53,11 @@ public:
 		, Description(Description)
 		, Rating(Rating)
 	{}
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trait")
 	FString Id;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trait")
 	FString Description;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trait")
 	int32 Rating;
 };
 
@@ -73,9 +73,9 @@ public:
 		: Id(Id)
 		, Description(Description)
 	{}
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Profession")
 	FString Id;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Profession")
 	FString Description;
 };
 
@@ -90,11 +90,11 @@ public:
 		, Title(Title)
 		, Description(Description)
 	{}
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString Id;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString Title;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString Description;
 };
 
