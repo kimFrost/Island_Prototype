@@ -40,6 +40,21 @@ public:
 	int32 Rating;
 };
 
+USTRUCT(BlueprintType)
+struct FST_Happening
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Happening(FString Title = "", int32 Rating = 0)
+		: Title(Title)
+		, Rating(Rating)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rating")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rating")
+	int32 Rating;
+};
+
 
 //~~~~~ DATA IMPORT ~~~~~//
 
@@ -86,6 +101,24 @@ struct FST_Item : public FTableRowBase
 	GENERATED_USTRUCT_BODY()
 public:
 	FST_Item(FString Id = "", FString Title = "", FString Description = "")
+		: Id(Id)
+		, Title(Title)
+		, Description(Description)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FString Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FString Description;
+};
+
+USTRUCT(BlueprintType)
+struct FST_Event : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Event(FString Id = "", FString Title = "", FString Description = "")
 		: Id(Id)
 		, Title(Title)
 		, Description(Description)
