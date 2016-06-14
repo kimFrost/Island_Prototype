@@ -32,16 +32,17 @@ class ISLAND_PROTOTYPE_API UIslandGameInstance : public UGameInstance
 public:
 
 	// Resources
-	TMap<FString, FST_Item> Items;
+	TMap<FString, FST_Item> StoredItems;
 
+	bool HasItemsAvailable(TMap<FString, int32>& Request, bool TagSearch);
 
 	UFUNCTION(BlueprintCallable, Category = "Resources", Meta = (ExpandEnumAsExecs = "Branches"))
-	FST_Item RequestItem(FString Id, int32 Quantity, TEnumAsByte<ERequestMetGateEnum>& Branches);
+	FST_Item RequestItem(FString Id, int32 Quantity, bool TagSearch, TEnumAsByte<ERequestMetGateEnum>& Branches);
 	
 	UFUNCTION(BlueprintCallable, Category = "Resources")
 	void StoreItem();
 	
 	UFUNCTION(BlueprintCallable, Category = "Resources")
-	void GetStoredItems();
+	TArray<FST_Item> GetStoredItems();
 
 };

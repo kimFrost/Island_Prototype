@@ -116,11 +116,13 @@ struct FST_Item : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Item(FString Id = "", FString Title = "", FString Description = "", int32 Quantity = 0)
+	FST_Item(FString Id = "", FString Title = "", FString Description = "", int32 Quantity = 0, FString Group = "", TArray<FString> Tags = TArray<FString>())
 		: Id(Id)
 		, Title(Title)
 		, Description(Description)
 		, Quantity(Quantity)
+		, Group(Group)
+		, Tags(Tags)
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString Id;
@@ -130,6 +132,10 @@ public:
 	FString Description;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	int32 Quantity;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FString Group;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	TArray<FString> Tags;
 };
 
 USTRUCT(BlueprintType)
