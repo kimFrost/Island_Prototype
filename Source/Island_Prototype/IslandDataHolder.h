@@ -23,6 +23,23 @@ enum class ETileActions : uint8
 };
 
 
+UENUM(BlueprintType)
+enum class EPersonState : uint8
+{
+	Hungry UMETA(DisplayName = "Hungry"),
+	Starving UMETA(DisplayName = "Starving"),
+	Sad UMETA(DisplayName = "Sad"),
+	Depressed UMETA(DisplayName = "Depressed"),
+	Injured UMETA(DisplayName = "Injured"),
+	Wounded UMETA(DisplayName = "Wounded"),
+	Sick UMETA(DisplayName = "Sick"),
+	Happy UMETA(DisplayName = "Happy"),
+	Ecstatic UMETA(DisplayName = "Ecstatic"),
+	Thirsty UMETA(DisplayName = "Thirsty"),
+	Dehydrated UMETA(DisplayName = "Dehydrated")
+};
+
+
 //~~~~~ STRUCTS ~~~~~//
 
 USTRUCT(BlueprintType)
@@ -54,7 +71,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rating")
 	int32 Rating;
 };
-
 
 //~~~~~ DATA IMPORT ~~~~~//
 
@@ -100,10 +116,11 @@ struct FST_Item : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Item(FString Id = "", FString Title = "", FString Description = "")
+	FST_Item(FString Id = "", FString Title = "", FString Description = "", int32 Quantity = 0)
 		: Id(Id)
 		, Title(Title)
 		, Description(Description)
+		, Quantity(Quantity)
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString Id;
@@ -111,6 +128,8 @@ public:
 	FString Title;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString Description;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	int32 Quantity;
 };
 
 USTRUCT(BlueprintType)

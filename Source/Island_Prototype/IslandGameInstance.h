@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Engine/GameInstance.h"
+#include "IslandDataHolder.h"
 #include "IslandGameInstance.generated.h"
 
 
@@ -30,9 +31,17 @@ class ISLAND_PROTOTYPE_API UIslandGameInstance : public UGameInstance
 	
 public:
 
+	// Resources
+	TMap<FString, FST_Item> Items;
+
+
 	UFUNCTION(BlueprintCallable, Category = "Resources", Meta = (ExpandEnumAsExecs = "Branches"))
-	static void RequestResource(FString Id, int32 Quantity, TEnumAsByte<ERequestMetGateEnum>& Branches);
+	FST_Item RequestItem(FString Id, int32 Quantity, TEnumAsByte<ERequestMetGateEnum>& Branches);
 	
+	UFUNCTION(BlueprintCallable, Category = "Resources")
+	void StoreItem();
 	
-	
+	UFUNCTION(BlueprintCallable, Category = "Resources")
+	void GetStoredItems();
+
 };
