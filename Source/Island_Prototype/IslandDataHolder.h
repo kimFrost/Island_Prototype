@@ -72,6 +72,22 @@ public:
 	int32 Rating;
 };
 
+USTRUCT(BlueprintType)
+struct FST_Provider
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Provider(FString Id = "", float Quanity = 0.f)
+		: Id(Id)
+		, Quanity(Quanity)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
+	FString Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
+	float Quanity;
+};
+
+
 //~~~~~ DATA IMPORT ~~~~~//
 
 USTRUCT(BlueprintType)
@@ -116,13 +132,14 @@ struct FST_Item : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Item(FString Id = "", FString Title = "", FString Description = "", int32 Quantity = 0, FString Group = "", TArray<FString> Tags = TArray<FString>())
+	FST_Item(FString Id = "", FString Title = "", FString Description = "", int32 Quantity = 0, FString Group = "", TArray<FString> Tags = TArray<FString>(), TArray<FST_Provider> Provides = TArray<FST_Provider>())
 		: Id(Id)
 		, Title(Title)
 		, Description(Description)
 		, Quantity(Quantity)
 		, Group(Group)
 		, Tags(Tags)
+		, Provides()
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString Id;
@@ -136,6 +153,8 @@ public:
 	FString Group;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	TArray<FString> Tags;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	TArray<FST_Provider> Provides;
 };
 
 USTRUCT(BlueprintType)

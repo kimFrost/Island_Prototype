@@ -31,18 +31,39 @@ class ISLAND_PROTOTYPE_API UIslandGameInstance : public UGameInstance
 	
 public:
 
-	// Resources
+	// Sets default values for this's properties
+	UIslandGameInstance(const FObjectInitializer &ObjectInitializer);
+
+	//~~ RESOURCES ~~//
+
 	TMap<FString, FST_Item> StoredItems;
 
-	bool HasItemsAvailable(TMap<FString, int32>& Request, bool TagSearch);
+
+
+	//~~ Data ~~//
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Data")
+	UDataTable* DATA_Items;
+
+	UFUNCTION(BlueprintCallable, Category = "Data")
+	void ReadTables();
+
+
+
+	bool HasItemsAvailable(TMap<FString, float>& Request, bool bTagSearch, bool bUseProvides);
+
+	UFUNCTION(BlueprintCallable, Category = "Resources")
+	FST_Item GetRandItem();
 
 	UFUNCTION(BlueprintCallable, Category = "Resources", Meta = (ExpandEnumAsExecs = "Branches"))
-	FST_Item RequestItem(FString Id, int32 Quantity, bool TagSearch, TEnumAsByte<ERequestMetGateEnum>& Branches);
+	FST_Item RequestItem(FString Id, int32 Quantity, bool bTagSearch, bool bUseProvides, TEnumAsByte<ERequestMetGateEnum>& Branches);
 	
 	UFUNCTION(BlueprintCallable, Category = "Resources")
-	void StoreItem();
+	FST_Item StoreItem(FString Id, int Quantity);
 	
 	UFUNCTION(BlueprintCallable, Category = "Resources")
 	TArray<FST_Item> GetStoredItems();
+
+
 
 };
