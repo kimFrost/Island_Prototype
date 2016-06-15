@@ -52,66 +52,7 @@ bool UIslandGameInstance::HasItemsAvailable(TMap<FString, float>& Request, bool 
 	bool RequestMet = true;
 	TMap<FString, FST_Item> Items = StoredItems; //~~ Copy items to prevent destruction of data ~~//
 
-	//!! Produce search? Mango gives 0.5 food.. !!//
 
-	//?? I shouldn't combine bTagSearch and bUseProvides ??//
-
-	//?? Just loop all and their providers ??//
-
-	if (bTagSearch)
-	{
-		for (auto& ResourceRequest : Request)
-		{
-			float RequestSize = ResourceRequest.Value;
-			// Re-copy items ? No!
-			for (auto& Item : Items)
-			{
-				if (RequestSize <= 0) break; // Early exit
-				if (Item.Value.Tags.Contains(ResourceRequest.Key)) // Item has request tag
-				{
-					if (bUseProvides)
-					{
-						for (auto& Provide : Item.Value.Provides)
-						{
-							if (Provide.Id == ResourceRequest.Key)
-							{
-								RequestSize -= Provide.Quantity * Item.Value.Quantity; // Provides * items in storage of type
-							}
-						}
-					}
-					else
-					{
-						RequestSize -= Item.Value.Quantity;
-					}
-				}
-			}
-			if (RequestSize > 0) 
-			{
-				RequestMet = false;
-				break;
-			}
-		}
-	}
-	else
-	{
-		for (auto& ResourceRequest : Request)
-		{
-			if (Items.Contains(ResourceRequest.Key))
-			{
-				int32 RequestSize = ResourceRequest.Value;
-				if (RequestSize > Items[ResourceRequest.Key].Quantity) //~~ If request is larger than the resource pool ~~//
-				{
-					RequestMet = false;
-					break;
-				}
-			}
-			else
-			{
-				RequestMet = false;
-				break;
-			}
-		}
-	}
 	return RequestMet;
 }
 
@@ -218,9 +159,22 @@ TArray<FST_Item> UIslandGameInstance::RequestResource(FString Id, int32 Quantity
 				if (Item.Value.Provides.Id == ResourceRequest.Key) // Item has provides the requested resource
 				{
 					float TotalItemProvide = Item.Value.Provides.Quantity * Item.Value.Quantity;
-					if (TotalItemProvide > RequestSize)
+					if (TotalItemProvide >= RequestSize)
 					{
-
+						int AmountNeeded = RequestSize / Item.Value.Provides.Quantity;
+						RequestSize = 0;
+						FST_Item ConsumedItem = Item.Value;
+						ConsumedItem.Quantity = AmountNeeded;
+						Items.Add(ConsumedItem);
+						Item.Value.Quantity -= AmountNeeded;
+					}
+					else 
+					{
+						RequestSize -= TotalItemProvide;
+						FST_Item ConsumedItem = Item.Value;
+						ConsumedItem.Quantity = Item.Value.Quantity; // maybe redudant
+						Items.Add(ConsumedItem);
+						Item.Value.Quantity = 0;
 					}
 					//RequestSize -= Item.Value.Provides.Quantity * Item.Value.Quantity; // Provides * items in storage of type
 				}
