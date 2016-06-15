@@ -75,7 +75,7 @@ bool UIslandGameInstance::HasItemsAvailable(TMap<FString, float>& Request, bool 
 						{
 							if (Provide.Id == ResourceRequest.Key)
 							{
-								RequestSize -= Provide.Quanity * Item.Value.Quantity; // Provides * items in storage of type
+								RequestSize -= Provide.Quantity * Item.Value.Quantity; // Provides * items in storage of type
 							}
 						}
 					}
@@ -116,10 +116,49 @@ bool UIslandGameInstance::HasItemsAvailable(TMap<FString, float>& Request, bool 
 }
 
 
-/******************** RequestItem *************************/
-FST_Item UIslandGameInstance::RequestItem(FString Id, int32 Quantity, bool bTagSearch, bool bUseProvides, TEnumAsByte<ERequestMetGateEnum>& Branches)
+
+/******************** HasResourcesAvailable *************************/
+bool UIslandGameInstance::HasResourcesAvailable(TMap<FString, float>& Request)
 {
-	FST_Item Resource = FST_Item();
+	bool RequestMet = true;
+	
+	TMap<FString, FST_Item> Items = StoredItems; //~~ Copy items to prevent destruction of data ~~//
+
+	for (auto& ResourceRequest : Request)
+	{
+		float RequestSize = ResourceRequest.Value;
+		for (auto& Item : Items)
+		{
+			//if (Item.Value.Tags.Contains(ResourceRequest.Key)) // Item has request tag
+			if (Item.Value.Provides.Id == ResourceRequest.Key) // Item has provides the requested resource
+			{
+				RequestSize -= Item.Value.Provides.Quantity * Item.Value.Quantity; // Provides * items in storage of type
+				/*
+				for (auto& Provide : Item.Value.Provides)
+				{
+					if (Provide.Id == ResourceRequest.Key)
+					{
+						RequestSize -= Provide.Quantity * Item.Value.Quantity; // Provides * items in storage of type
+					}
+				}
+				*/
+			}
+		}
+		if (RequestSize > 0)
+		{
+			RequestMet = false;
+			break;
+		}
+	}
+
+	return RequestMet;
+}
+
+
+/******************** RequestItem *************************/
+TArray<FST_Item> UIslandGameInstance::RequestItem(FString Id, int32 Quantity, bool bTagSearch, bool bUseProvides, TEnumAsByte<ERequestMetGateEnum>& Branches)
+{
+	TArray<FST_Item> Items;
 	bool Met = true;
 
 	TMap<FString, float> Request;
@@ -156,7 +195,55 @@ FST_Item UIslandGameInstance::RequestItem(FString Id, int32 Quantity, bool bTagS
 		Branches = ERequestMetGateEnum::NotMet;
 	}
 	//~~ Return item ~~//
-	return Resource;
+	return Items;
+}
+
+
+/******************** RequestResource *************************/
+TArray<FST_Item> UIslandGameInstance::RequestResource(FString Id, int32 Quantity, TEnumAsByte<ERequestMetGateEnum>& Branches)
+{
+	TArray<FST_Item> Items;
+	bool Met = true;
+
+	TMap<FString, float> Request;
+	Request.Add(Id, Quantity);
+
+	if (HasResourcesAvailable(Request))
+	{
+		for (auto& ResourceRequest : Request) // Loop request. //!! Only one id for now !!//
+		{
+			float RequestSize = ResourceRequest.Value;
+			for (auto& Item : StoredItems)
+			{
+				if (Item.Value.Provides.Id == ResourceRequest.Key) // Item has provides the requested resource
+				{
+					float TotalItemProvide = Item.Value.Provides.Quantity * Item.Value.Quantity;
+					if (TotalItemProvide > RequestSize)
+					{
+
+					}
+					//RequestSize -= Item.Value.Provides.Quantity * Item.Value.Quantity; // Provides * items in storage of type
+				}
+			}
+		}
+	}
+	else
+	{
+		Met = false;
+	}
+
+	//~~ Gate routes ~~//
+	if (Met)
+	{
+		Branches = ERequestMetGateEnum::Met;
+	}
+	else
+	{
+		Branches = ERequestMetGateEnum::NotMet;
+	}
+
+	//~~ Return item ~~//
+	return Items;
 }
 
 

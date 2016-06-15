@@ -77,14 +77,14 @@ struct FST_Provider
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Provider(FString Id = "", float Quanity = 0.f)
+	FST_Provider(FString Id = "", float Quantity = 0.f)
 		: Id(Id)
-		, Quanity(Quanity)
+		, Quantity(Quantity)
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
 	FString Id;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
-	float Quanity;
+	float Quantity;
 };
 
 
@@ -132,7 +132,7 @@ struct FST_Item : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Item(FString Id = "", FString Title = "", FString Description = "", int32 Quantity = 0, FString Group = "", TArray<FString> Tags = TArray<FString>(), TArray<FST_Provider> Provides = TArray<FST_Provider>())
+	FST_Item(FString Id = "", FString Title = "", FString Description = "", int32 Quantity = 0, FString Group = "", TArray<FString> Tags = TArray<FString>(), FST_Provider Provides = FST_Provider())
 		: Id(Id)
 		, Title(Title)
 		, Description(Description)
@@ -154,7 +154,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	TArray<FString> Tags;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	TArray<FST_Provider> Provides;
+	FST_Provider Provides;
 };
 
 USTRUCT(BlueprintType)
