@@ -45,6 +45,20 @@ FST_Item UIslandGameInstance::GetRandItem() {
 }
 
 
+/******************** GetTotalResourceStored *************************/
+float UIslandGameInstance::GetTotalResourceStored(FString Id)
+{
+	float Total = 0.f;
+	for (auto& Item : StoredItems)
+	{
+		if (Item.Value.Provides.Id == Id)
+		{
+			Total += Item.Value.Provides.Quantity * Item.Value.Quantity;
+		}
+	}
+	return Total;
+}
+
 
 /******************** HasItemsAvailable *************************/
 bool UIslandGameInstance::HasItemsAvailable(TMap<FString, float>& Request, bool bTagSearch, bool bUseProvides)
@@ -141,7 +155,7 @@ TArray<FST_Item> UIslandGameInstance::RequestItem(FString Id, int32 Quantity, bo
 
 
 /******************** RequestResource *************************/
-TArray<FST_Item> UIslandGameInstance::RequestResource(FString Id, int32 Quantity, TEnumAsByte<ERequestMetGateEnum>& Branches)
+TArray<FST_Item> UIslandGameInstance::RequestResource(FString Id, float Quantity, TEnumAsByte<ERequestMetGateEnum>& Branches)
 {
 	TArray<FST_Item> Items;
 	bool Met = true;

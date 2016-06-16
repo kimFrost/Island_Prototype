@@ -48,12 +48,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Data")
 	void ReadTables();
 
-
+	UFUNCTION(BlueprintCallable, Category = "Resources")
+	float GetTotalResourceStored(FString Id);
 
 	bool HasItemsAvailable(TMap<FString, float>& Request, bool bTagSearch, bool bUseProvides);
 
 	bool HasResourcesAvailable(TMap<FString, float>& Request);
-
 
 	UFUNCTION(BlueprintCallable, Category = "Resources")
 	FST_Item GetRandItem();
@@ -62,7 +62,7 @@ public:
 	TArray<FST_Item> RequestItem(FString Id, int32 Quantity, bool bTagSearch, bool bUseProvides, TEnumAsByte<ERequestMetGateEnum>& Branches);
 	
 	UFUNCTION(BlueprintCallable, Category = "Resources", Meta = (ExpandEnumAsExecs = "Branches"))
-	TArray<FST_Item> RequestResource(FString Id, int32 Quantity, TEnumAsByte<ERequestMetGateEnum>& Branches);
+	TArray<FST_Item> RequestResource(FString Id, float Quantity, TEnumAsByte<ERequestMetGateEnum>& Branches);
 
 	UFUNCTION(BlueprintCallable, Category = "Resources")
 	FST_Item StoreItem(FString Id, int Quantity);
