@@ -17,7 +17,14 @@ enum ERequestMetGateEnum
 	NotMet
 };
 
-
+UENUM(BlueprintType)
+enum class ETurnSteps : uint8
+{
+	ProcessStations UMETA(DisplayName = "Gather"),
+	Explore UMETA(DisplayName = "Explore"),
+	FoodConsumption UMETA(DisplayName = "FoodConsumption"),
+	ProcessPeopleStates UMETA(DisplayName = "ProcessPeopleStates")
+};
 
 
 
