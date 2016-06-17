@@ -18,12 +18,13 @@ enum ERequestMetGateEnum
 };
 
 UENUM(BlueprintType)
-enum class ETurnSteps : uint8
+enum class EGameState : uint8
 {
-	ProcessStations UMETA(DisplayName = "Gather"),
-	Explore UMETA(DisplayName = "Explore"),
+	BaseManagement UMETA(DisplayName = "BaseManagement"),
+	ProcessStations UMETA(DisplayName = "ProcessStations"),
+	Exploring UMETA(DisplayName = "Exploring"),
 	FoodConsumption UMETA(DisplayName = "FoodConsumption"),
-	ProcessPeopleStates UMETA(DisplayName = "ProcessPeopleStates")
+	ProcessPeopleStates UMETA(DisplayName = "ProcessPeopleStates"),
 };
 
 
