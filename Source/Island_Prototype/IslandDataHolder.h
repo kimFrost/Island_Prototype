@@ -39,6 +39,14 @@ enum class EPersonState : uint8
 	Dehydrated UMETA(DisplayName = "Dehydrated")
 };
 
+UENUM(BlueprintType)
+enum class EDeathCauses : uint8
+{
+	Stavation UMETA(DisplayName = "Stavation"),
+	DoomEvent UMETA(DisplayName = "DoomEvent")
+};
+
+
 
 //~~~~~ STRUCTS ~~~~~//
 
