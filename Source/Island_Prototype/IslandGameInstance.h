@@ -66,6 +66,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Resources")
 	FST_Item GetRandItem();
 
+	UFUNCTION(BlueprintCallable, Category = "Resources")
+	FST_Item GetItem(FString Id, int32 Quantity);
+
 	UFUNCTION(BlueprintCallable, Category = "Resources", Meta = (ExpandEnumAsExecs = "Branches"))
 	TArray<FST_Item> RequestItem(FString Id, int32 Quantity, bool bTagSearch, bool bUseProvides, TEnumAsByte<ERequestMetGateEnum>& Branches);
 	

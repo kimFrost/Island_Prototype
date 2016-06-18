@@ -45,6 +45,23 @@ FST_Item UIslandGameInstance::GetRandItem() {
 }
 
 
+/******************** GetItem *************************/
+FST_Item UIslandGameInstance::GetItem(FString Id, int32 Quantity) {
+	FST_Item Item;
+	if (DATA_Items)
+	{
+		static const FString ContextString(TEXT("ItemLookup"));
+		FST_Item* ItemData = DATA_Items->FindRow<FST_Item>(FName(*Id), ContextString);
+		if (ItemData)
+		{
+			Item = *ItemData; // Copy
+			Item.Quantity = Quantity;
+		}
+	}
+	return Item;
+}
+
+
 /******************** GetTotalResourceStored *************************/
 float UIslandGameInstance::GetTotalResourceStored(FString Id)
 {
@@ -230,9 +247,12 @@ FST_Item UIslandGameInstance::StoreItem(FString Id, int Quantity) {
 		{
 			static const FString ContextString(TEXT("ItemLookup"));
 			FST_Item* ItemData = DATA_Items->FindRow<FST_Item>(FName(*Id), ContextString);
-			Item = *ItemData; // Copy
-			Item.Quantity = Quantity;
-			StoredItems.Add(Id, Item);
+			if (ItemData)
+			{
+				Item = *ItemData; // Copy
+				Item.Quantity = Quantity;
+				StoredItems.Add(Id, Item);
+			}
 		}
 		
 		/*

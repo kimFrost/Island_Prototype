@@ -20,6 +20,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
 	TArray<EPersonState> States;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
+	TArray<FST_Item> Backpack;
+
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
