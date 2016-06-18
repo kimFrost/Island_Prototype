@@ -234,7 +234,6 @@ TArray<FST_Item> UIslandGameInstance::RequestResource(FString Id, float Quantity
 
 /******************** StoreItem *************************/
 FST_Item UIslandGameInstance::StoreItem(FString Id, int Quantity) {
-	// Get data from data table and create new item for storage
 	FST_Item Item;
 	if (DATA_Items)
 	{
@@ -254,23 +253,6 @@ FST_Item UIslandGameInstance::StoreItem(FString Id, int Quantity) {
 				StoredItems.Add(Id, Item);
 			}
 		}
-		
-		/*
-		FST_Card Card;
-		if (DATA_Cards)
-		{
-			TArray<FName> RowNames = DATA_Cards->GetRowNames();
-			int RandIndex = FMath::RandRange(0, RowNames.Num() - 1);
-			FName RowId = RowNames[RandIndex];
-			static const FString ContextString(TEXT("CardLookup"));
-			FST_Card* CardData = DATA_Cards->FindRow<FST_Card>(RowId, ContextString);
-			if (CardData)
-			{
-				Card = *CardData;
-			}
-		}
-		return Card;
-		*/
 	}
 	return Item;
 }

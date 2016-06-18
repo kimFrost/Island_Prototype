@@ -1,0 +1,44 @@
+
+FST_Provider: {
+	FString Id;
+	float Quantity;
+}
+
+
+Mango: {
+	FString Id;
+	FString Title;
+	FString Description;
+	int32 Quantity;
+	FString Group;
+	TArray<FString> Tags;
+	TArray<FST_Provider> Provides; =>  FST_Provider Provides;
+},
+Coconut: {
+	FString Id;
+	FString Title;
+	FString Description;
+	int32 Quantity;
+	FString Group;
+	TArray<FString> Tags;
+	TArray<FST_Provider> Provides; =>  FST_Provider Provides;
+}
+
+
+
+
+
+
+
+Mango: {
+	q: 3,
+	p: { food, 0.5 }
+}
+Coconut: {
+	q: 4,
+	p: { food, 0.75 }
+}
+FishLarge: {
+	q: 1,
+	p: { food, 1.5 }
+}
