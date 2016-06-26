@@ -8,7 +8,12 @@
 
 
 
-
+enum class EIslandPlayState : uint8 //** you can replace short with uint8 */
+{
+	EPlaying,
+	EGameOver,
+	EUnknown
+};
 
 UENUM(BlueprintType)
 enum ERequestMetGateEnum
@@ -26,6 +31,20 @@ enum class EGameState : uint8
 	FoodConsumption UMETA(DisplayName = "FoodConsumption"),
 	ProcessPeopleStates UMETA(DisplayName = "ProcessPeopleStates"),
 };
+
+
+//~~~~~ Forward Declarations ~~~~~//
+class AIslandTile;
+class AIslandPerson;
+
+
+//~~~~~ Delegates/Event dispatcher ~~~~~//
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTurnSwitched, float, Turn);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNewTurn, float, Turn);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTileClicked, AIslandTile*, Tile);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAnyTileRevealed, AIslandTile*, Tile);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPersonMoveEnded, AIslandPerson*, Person, AIslandTile*, Tile);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPersonSelected, AIslandPerson*, Person);
 
 
 
@@ -81,6 +100,24 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Resources")
 	TArray<FST_Item> GetStoredItems();
 
+	/*********** DELEGATES **************/
 
+	//UPROPERTY(BlueprintAssignable, Category = "Turn")
+	//FTurnSwitched OnTurnSwitched;
+
+	//UPROPERTY(BlueprintAssignable, Category = "Turn")
+	//FNewTurn OnNewTurn;
+
+	UPROPERTY(BlueprintAssignable, Category = "Input")
+	FTileClicked OnTileClicked;
+
+	UPROPERTY(BlueprintAssignable, Category = "Input")
+	FAnyTileRevealed OnTileRevealed;
+
+	//UPROPERTY(BlueprintAssignable, Category = "Input")
+	FPersonMoveEnded OnPersonMoveEnded;
+
+	//UPROPERTY(BlueprintAssignable, Category = "Input")
+	FPersonSelected OnPersonSelected;
 
 };

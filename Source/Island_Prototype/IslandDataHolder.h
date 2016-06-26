@@ -46,6 +46,14 @@ enum class EDeathCauses : uint8
 	DoomEvent UMETA(DisplayName = "DoomEvent")
 };
 
+UENUM(BlueprintType)
+enum class EPersonStat : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Confidence UMETA(DisplayName = "Confidence"),
+	Endurance UMETA(DisplayName = "Endurance"),
+	Cognitive UMETA(DisplayName = "Cognitive")
+};
 
 
 //~~~~~ STRUCTS ~~~~~//
@@ -93,6 +101,21 @@ public:
 	FString Id;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
 	float Quantity;
+};
+
+USTRUCT(BlueprintType)
+struct FST_Stat : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Stat(EPersonStat Stat = EPersonStat::None, int32 Level = 0)
+		: Stat(Stat)
+		, Level(Level)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+	EPersonStat Stat;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+	int32 Level;
 };
 
 
@@ -232,6 +255,68 @@ public:
 	//TArray<FST_Stat> Stats;
 };
 */
+
+USTRUCT(BlueprintType)
+struct FST_Action : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Action()
+		: Title(TEXT("No title"))
+		, TileId(TEXT(""))
+		, Type(ETileActions::DoNothing)
+		, Conditions(TArray<FString>())
+		, NotConditions(TArray<FString>())
+		, ReqStats(TArray<FST_Stat>())
+		, Events(TArray<FString>())
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Action")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Action")
+	FString TileId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Action")
+	ETileActions Type;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Action")
+	TArray<FString> Conditions;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Action")
+	TArray<FString> NotConditions;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Action")
+	TArray<FST_Stat> ReqStats;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Action")
+	TArray<FString> Events;
+};
+
+
+
+USTRUCT(BlueprintType)
+struct FST_Card : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Card()
+		: Id(TEXT(""))
+		, Title(TEXT("No title"))
+		, TileScene(TEXT(""))
+		, Items(TArray<FString>())
+		, Actions(TArray<FST_Action>())
+		, IdleActions(TArray<FST_Action>())
+		, bBlockPath(false)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
+	FString Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
+	FString TileScene;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
+	TArray<FString> Items;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
+	TArray<FST_Action> Actions;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
+	TArray<FST_Action> IdleActions;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
+	bool bBlockPath;
+};
 
 
 
