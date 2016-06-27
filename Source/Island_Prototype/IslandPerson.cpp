@@ -29,7 +29,7 @@ AIslandPerson::AIslandPerson()
 	MoveTimeEventUpdate.BindUFunction(this, "MoveEnded");
 	MoveTimeLine.SetTimelineFinishedFunc(MoveTimeEventUpdate);
 	//~~ Animation curve ~~//
-	static ConstructorHelpers::FObjectFinder<UCurveFloat> CurveObj(TEXT("CurveFloat'/Game/Util/MoveAnimCurve.MoveAnimCurve'"));
+	static ConstructorHelpers::FObjectFinder<UCurveFloat> CurveObj(TEXT("CurveFloat'/Game/Island/Util/Curves/MoveAnimCurve.MoveAnimCurve'"));
 	if (CurveObj.Succeeded())
 	{
 		MoveCurve = CurveObj.Object;

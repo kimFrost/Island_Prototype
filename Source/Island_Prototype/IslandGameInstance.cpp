@@ -144,7 +144,7 @@ TArray<FST_Item> UIslandGameInstance::RequestResource(FString Id, float Quantity
 			float RequestSize = ResourceRequest.Value;
 			while (RequestSize > 0)
 			{
-				bool AnyTaken = false;
+				bool bAnyTaken = false;
 				
 				//~~ Shuffle list of keys ~~//
 				TArray<FString> Keys;
@@ -172,25 +172,28 @@ TArray<FST_Item> UIslandGameInstance::RequestResource(FString Id, float Quantity
 							FST_Item ConsumedItem = Item;
 							ConsumedItem.Quantity = 1;
 							Items.Add(ConsumedItem);
-							AnyTaken = true;
+							bAnyTaken = true;
 							Item.Quantity--;
 						}
 					}
 				}
 
-				if (!AnyTaken && RequestSize > 0)
+				if (!bAnyTaken && RequestSize > 0)
 				{
 					// Take an item and produce waste
 					for (auto& Item : StoredItems)
 					{
-						if (Item.Value.Provides.Quantity >= RequestSize)
+						if (Item.Value.Provides.Id == ResourceRequest.Key && Item.Value.Quantity > 0)
 						{
-							RequestSize = 0;
-							FST_Item ConsumedItem = Item.Value;
-							ConsumedItem.Quantity = 1;
-							Items.Add(ConsumedItem);
-							AnyTaken = true;
-							Item.Value.Quantity--;
+							if (Item.Value.Provides.Quantity >= RequestSize)
+							{
+								RequestSize = 0;
+								FST_Item ConsumedItem = Item.Value;
+								ConsumedItem.Quantity = 1;
+								Items.Add(ConsumedItem);
+								bAnyTaken = true;
+								Item.Value.Quantity--;
+							}
 						}
 					}
 					if (RequestSize > 0)
@@ -200,7 +203,7 @@ TArray<FST_Item> UIslandGameInstance::RequestResource(FString Id, float Quantity
 						break;
 					}
 				}
-				else if (!AnyTaken)
+				else if (!bAnyTaken)
 				{
 					// Infinity loop safe handling
 					Met = false;
