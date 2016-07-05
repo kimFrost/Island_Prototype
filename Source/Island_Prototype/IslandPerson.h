@@ -23,6 +23,16 @@ public:
 	// Sets default values for this character's properties
 	AIslandPerson();
 
+	//~~ DATA ~~//
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString FirstName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString LastName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	TArray<FST_TaskDone> TasksDoneThisTurn;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
 	TArray<EPersonState> States;

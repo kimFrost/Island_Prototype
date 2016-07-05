@@ -2,6 +2,7 @@
 
 #include "Island_Prototype.h"
 #include "IslandDataHolder.h"
+#include "IslandPerson.h"
 #include "IslandGameInstance.h"
 
 
@@ -11,7 +12,6 @@ UIslandGameInstance::UIslandGameInstance(const FObjectInitializer &ObjectInitial
 {
 	DATA_Items = nullptr;
 	ReadTables();
-
 
 }
 
@@ -26,6 +26,37 @@ void UIslandGameInstance::ReadTables()
 		DATA_Items = ItemTable;
 	}
 
+}
+
+
+/******************** EnrichString *************************/
+FString UIslandGameInstance::EnrichString(FString String, AIslandPerson* Person)
+{
+	if (Person)
+	{
+		String = String.Replace(TEXT("%FIRSTNAME%"), *Person->FirstName);
+	}
+	return String;
+}
+
+
+
+/******************** AddTaskDone *************************/
+void UIslandGameInstance::AddTaskDone(FString Description, AIslandPerson* By, EUsefulRating Rating, ETaskType TaskType)
+{
+	FST_TaskDone DoneTask = FST_TaskDone(EnrichString(Description, By), By, Rating, TaskType);
+	TasksDoneThisTurn.Add(DoneTask);
+	if (By)
+	{
+		By->TasksDoneThisTurn.Add(DoneTask);
+	}
+}
+
+
+/******************** AddNotification *************************/
+void UIslandGameInstance::AddNotification(FString Msg, AIslandPerson* Concerning, ENotificationType Type)
+{
+	Notifications.Add(FST_Notification(EnrichString(Msg, Concerning), Type));
 }
 
 

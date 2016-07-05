@@ -26,6 +26,7 @@ UENUM(BlueprintType)
 enum class EGameState : uint8
 {
 	BaseManagement UMETA(DisplayName = "BaseManagement"),
+	TurnSummery UMETA(DisplayName = "TurnSummery"),
 	ProcessStations UMETA(DisplayName = "ProcessStations"),
 	Exploring UMETA(DisplayName = "Exploring"),
 	FoodConsumption UMETA(DisplayName = "FoodConsumption"),
@@ -61,13 +62,35 @@ public:
 	// Sets default values for this's properties
 	UIslandGameInstance(const FObjectInitializer &ObjectInitializer);
 
+	//~~ UTIL ~~//
+
+	UFUNCTION(BlueprintCallable, Category = "Util")
+	FString EnrichString(FString String, AIslandPerson* Person);
+
+
+	//~~ TASKS + NOTIFICATIONS ~~//
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Task")
+	TArray<FST_TaskDone> TasksDoneThisTurn;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Notification")
+	TArray<FST_Notification> Notifications;
+
+	UFUNCTION(BlueprintCallable, Category = "Task")
+	void AddTaskDone(FString Description, AIslandPerson* By, EUsefulRating Rating = EUsefulRating::Neutral, ETaskType TaskType = ETaskType::Work);
+
+	UFUNCTION(BlueprintCallable, Category = "Task")
+	void AddNotification(FString Msg, AIslandPerson* Concerning, ENotificationType Type);
+
+
+
 	//~~ RESOURCES ~~//
 
 	TMap<FString, FST_Item> StoredItems;
 
 
 
-	//~~ Data ~~//
+	//~~ DATA ~~//
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Data")
 	UDataTable* DATA_Items;
@@ -99,6 +122,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Resources")
 	TArray<FST_Item> GetStoredItems();
+
 
 	/*********** DELEGATES **************/
 

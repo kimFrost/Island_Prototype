@@ -15,6 +15,9 @@ AIslandPerson::AIslandPerson()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	FirstName = "";
+	LastName = "";
+
 	MovePointsLeft = 2;
 	bIsSelected = false;
 	OnClicked.AddDynamic(this, &AIslandPerson::PersonClicked);

@@ -7,10 +7,34 @@
 
 
 //~~~~~ Forward Declarations ~~~~~//
-//class APOTLStructure;
+class AIslandPerson;
 
 
 //~~~~~ ENUMS ~~~~~//
+
+UENUM(BlueprintType)
+enum class EUsefulRating : uint8
+{
+	Useless UMETA(DisplayName = "Useless"),
+	Neutral UMETA(DisplayName = "Nothing special"),
+	Useful UMETA(DisplayName = "Useful"),
+	VeryUseful UMETA(DisplayName = "Very useful")
+};
+
+
+UENUM(BlueprintType)
+enum class ETaskType : uint8
+{
+	Consume UMETA(DisplayName = "Consume"),
+	Work UMETA(DisplayName = "Work")
+};
+
+
+UENUM(BlueprintType)
+enum class ENotificationType : uint8
+{
+	Warning UMETA(DisplayName = "Warning")
+};
 
 
 UENUM(BlueprintType)
@@ -57,6 +81,43 @@ enum class EPersonStat : uint8
 
 
 //~~~~~ STRUCTS ~~~~~//
+
+USTRUCT(BlueprintType)
+struct FST_Notification
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Notification(FString Msg = "", ENotificationType Type = ENotificationType::Warning)
+		: Msg(Msg)
+		, Type(Type)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Notification")
+	FString Msg;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Notification")
+	ENotificationType Type;
+};
+
+
+USTRUCT(BlueprintType)
+struct FST_TaskDone
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_TaskDone(FString Description = "", AIslandPerson* By = nullptr, EUsefulRating Rating = EUsefulRating::Neutral, ETaskType TaskType = ETaskType::Work)
+		: Description(Description)
+		, By(By)
+		, Rating(Rating)
+		, TaskType(TaskType)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	FString Description;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	AIslandPerson* By;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	EUsefulRating Rating;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	ETaskType TaskType;
+};
 
 USTRUCT(BlueprintType)
 struct FST_Rating
