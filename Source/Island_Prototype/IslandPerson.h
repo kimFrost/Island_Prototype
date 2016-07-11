@@ -41,7 +41,23 @@ public:
 	TArray<FST_Item> Backpack;
 
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
+	int32 MaxHP;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
+	int32 HP;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
+	bool bEatenThisTurn;
+
+	UFUNCTION(BlueprintCallable, Category = "Person")
+	void Eat();
+	
+	UFUNCTION(BlueprintCallable, Category = "Person")
+	void Die(EDeathCauses Cause);
+
+	UFUNCTION(BlueprintCallable, Category = "Person")
+	void TakeDamage(EDeathCauses Cause, int32 Amount);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
 	bool bIsSelected;

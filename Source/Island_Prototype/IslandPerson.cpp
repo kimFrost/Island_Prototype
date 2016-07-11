@@ -18,6 +18,11 @@ AIslandPerson::AIslandPerson()
 	FirstName = "";
 	LastName = "";
 
+	MaxHP = 3;
+	HP = 3;
+
+	bEatenThisTurn = false;
+
 	MovePointsLeft = 2;
 	bIsSelected = false;
 	OnClicked.AddDynamic(this, &AIslandPerson::PersonClicked);
@@ -40,6 +45,43 @@ AIslandPerson::AIslandPerson()
 	}
 }
 
+
+
+/******************** Eat *************************/
+void AIslandPerson::Eat()
+{
+	bEatenThisTurn = true;
+}
+
+/******************** Die *************************/
+void AIslandPerson::Die(EDeathCauses Cause)
+{
+	UIslandGameInstance* GameInstance = Cast<UIslandGameInstance>(GetGameInstance());
+	if (GameInstance)
+	{
+		FString CauseString;
+
+		const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EDeathCauses"), true);
+		if (!EnumPtr) CauseString = FString("Invalid");
+		CauseString = EnumPtr->GetEnumName((int32)Cause);
+
+		// Remove from list of people // Or maybe just give them a death state
+		GameInstance->People.Remove(this);
+		GameInstance->AddTaskDone("%FIRSTNAME% dies from " + CauseString, this, EUsefulRating::Neutral, ETaskType::Work);
+		this->Destroy();
+	}
+}
+
+/******************** TakeDamage *************************/
+void AIslandPerson::TakeDamage(EDeathCauses Cause, int32 Amount)
+{
+	HP -= Amount;
+	if (HP <= 0)
+	{
+		HP = 0;
+		Die(Cause);
+	}
+}
 
 
 /******************** TimelineUpdate *************************/

@@ -89,6 +89,9 @@ public:
 	TMap<FString, FST_Item> StoredItems;
 
 
+	//~~ PEOPLE ~~//
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Data")
+	TArray<AIslandPerson*> People;
 
 	//~~ DATA ~~//
 
