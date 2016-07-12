@@ -172,7 +172,7 @@ public:
 };
 
 USTRUCT(BlueprintType)
-struct FST_Stat : public FTableRowBase
+struct FST_Stat
 {
 	GENERATED_USTRUCT_BODY()
 public:
@@ -186,8 +186,62 @@ public:
 	int32 Level;
 };
 
+USTRUCT(BlueprintType)
+struct FST_DoomOutcome
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_DoomOutcome(FString Title = "", float ChanceRangeFrom = 0.f, float ChanceRangeTo = 100.f)
+		: Title(Title)
+		, ChanceRangeFrom(ChanceRangeFrom)
+		, ChanceRangeTo(ChanceRangeTo)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	float ChanceRangeFrom;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	float ChanceRangeTo;
+};
+
+USTRUCT(BlueprintType)
+struct FST_DoomBonus
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_DoomBonus(FString Title = "", float ChanceBonus = 0.f)
+		: Title(Title)
+		, ChanceBonus(ChanceBonus)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	float ChanceBonus;
+};
+
 
 //~~~~~ DATA IMPORT ~~~~~//
+
+USTRUCT(BlueprintType)
+struct FST_DoomEventNew : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_DoomEventNew(FString Id = "", FString Title = "", FString Description = "", TArray<FST_DoomOutcome> Outcomes = TArray<FST_DoomOutcome>())
+		: Id(Id)
+		, Title(Title)
+		, Description(Description)
+		, Outcomes(Outcomes)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	FString Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	FString Description;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	TArray<FST_DoomOutcome> Outcomes;
+};
 
 USTRUCT(BlueprintType)
 struct FST_Trait : public FTableRowBase
