@@ -31,6 +31,7 @@ enum class EGameState : uint8
 	Exploring UMETA(DisplayName = "Exploring"),
 	FoodConsumption UMETA(DisplayName = "FoodConsumption"),
 	ProcessPeopleStates UMETA(DisplayName = "ProcessPeopleStates"),
+	DoomEvent UMETA(DisplayName = "DoomEvent"),
 };
 
 

@@ -15,6 +15,7 @@ class AIslandPerson;
 UENUM(BlueprintType)
 enum class EUsefulRating : uint8
 {
+	UtterlyUseless UMETA(DisplayName = "Utterly useless"),
 	Useless UMETA(DisplayName = "Useless"),
 	Neutral UMETA(DisplayName = "Nothing special"),
 	Useful UMETA(DisplayName = "Useful"),
@@ -64,10 +65,16 @@ enum class EPersonState : uint8
 };
 
 UENUM(BlueprintType)
-enum class EDeathCauses : uint8
+enum class EDeathCause : uint8
 {
 	Stavation UMETA(DisplayName = "Stavation"),
 	DoomEvent UMETA(DisplayName = "DoomEvent")
+};
+
+UENUM(BlueprintType)
+enum class ERegenCause : uint8
+{
+	Satiated UMETA(DisplayName = "Satiated")
 };
 
 UENUM(BlueprintType)
