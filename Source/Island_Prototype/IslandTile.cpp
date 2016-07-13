@@ -16,10 +16,12 @@ AIslandTile::AIslandTile(const FObjectInitializer &ObjectInitializer) : Super(Ob
 	IsCamp = false;
 	DistanceFromSelectedPerson = 0;
 
+	
 	OnClicked.AddDynamic(this, &AIslandTile::TileClicked);
+
 	//OnReleased
-	OnBeginCursorOver.AddDynamic(this, &AIslandTile::TileHoverBegin);
-	OnEndCursorOver.AddDynamic(this, &AIslandTile::TileHoverEnd);
+	//OnBeginCursorOver.AddDynamic(this, &AIslandTile::TileHoverBegin); // Build error 4.12
+	//OnEndCursorOver.AddDynamic(this, &AIslandTile::TileHoverEnd); // Build error 4.12
 
 	PeopleLocationDisplacement = FVector(300, 300, 50);
 
@@ -278,7 +280,7 @@ void AIslandTile::DeselectTile()
 
 
 /******************** TileClicked *************************/
-void AIslandTile::TileClicked()
+void AIslandTile::TileClicked(AActor* TouchedActor, FKey ButtonPressed)
 {
 	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Magenta, "IslandTile::TileClicked");
 	//UIslandGameInstance GameInstance = Cast<UIslandGameInstance>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
@@ -310,14 +312,14 @@ void AIslandTile::TileClicked()
 
 
 /******************** TileHoverBegin *************************/
-void AIslandTile::TileHoverBegin()
+void AIslandTile::TileHoverBegin(UPrimitiveComponent* pComponent)
 {
 
 }
 
 
 /******************** TileHoverEnd *************************/
-void AIslandTile::TileHoverEnd()
+void AIslandTile::TileHoverEnd(UPrimitiveComponent* pComponent)
 {
 
 }

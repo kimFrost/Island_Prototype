@@ -27,7 +27,9 @@ AIslandPerson::AIslandPerson()
 
 	MovePointsLeft = 2;
 	bIsSelected = false;
+
 	OnClicked.AddDynamic(this, &AIslandPerson::PersonClicked);
+
 	TilePlacedOn = nullptr;
 
 	MoveTimeLine.SetTimelineLength(1);
@@ -193,7 +195,7 @@ void AIslandPerson::MoveTo(AIslandTile* Tile) {
 
 
 /******************** PersonClicked *************************/
-void AIslandPerson::PersonClicked() {
+void AIslandPerson::PersonClicked(AActor* TouchedActor, FKey ButtonPressed) {
 	//UE_LOG(LogTemp, Log, TEXT("pawn clicked"));
 	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Magenta, "AIslandPerson:PersonClicked");
 	/*
@@ -205,7 +207,7 @@ void AIslandPerson::PersonClicked() {
 	*/
 	if (TilePlacedOn)
 	{
-		TilePlacedOn->TileClicked();
+		TilePlacedOn->TileClicked(nullptr, ButtonPressed); // proberly not thre correct parameter
 	}
 	SelectPerson();
 }

@@ -118,13 +118,13 @@ public:
 	//virtual void OnTileRevealed_Implementation();
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void TileClicked();
+	void TileClicked(AActor* TouchedActor, FKey ButtonPressed);
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void TileHoverBegin();
+	void TileHoverBegin(class UPrimitiveComponent* pComponent);
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void TileHoverEnd();
+	void TileHoverEnd(class UPrimitiveComponent* pComponent);
 
 
 	UFUNCTION(BlueprintCallable, Category = "Input")

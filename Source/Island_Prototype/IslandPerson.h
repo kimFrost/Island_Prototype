@@ -103,7 +103,7 @@ public:
 	void MoveTo(AIslandTile* Tile);
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void PersonClicked();
+	void PersonClicked(AActor* TouchedActor, FKey ButtonPressed);
 
 	UFUNCTION(BlueprintCallable, Category = "Person")
 	void SelectPerson();
