@@ -86,6 +86,22 @@ enum class EPersonStat : uint8
 	Cognitive UMETA(DisplayName = "Cognitive")
 };
 
+UENUM(BlueprintType)
+enum class ETarget : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Group UMETA(DisplayName = "Group"),
+	Person UMETA(DisplayName = "Person")
+};
+
+UENUM(BlueprintType)
+enum class EAction : uint8
+{
+	None UMETA(DisplayName = "None"),
+	TakeDamage UMETA(DisplayName = "Take damage")
+};
+
+
 
 //~~~~~ STRUCTS ~~~~~//
 
@@ -191,10 +207,12 @@ struct FST_DoomOutcome
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_DoomOutcome(FString Title = "", float ChanceRangeFrom = 0.f, float ChanceRangeTo = 100.f)
+	FST_DoomOutcome(FString Title = "", float ChanceRangeFrom = 0.f, float ChanceRangeTo = 1.f, ETarget Target = ETarget::None, EAction Action = EAction::None)
 		: Title(Title)
 		, ChanceRangeFrom(ChanceRangeFrom)
 		, ChanceRangeTo(ChanceRangeTo)
+		, Target(Target)
+		, Action(Action)
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
 	FString Title;
@@ -202,36 +220,44 @@ public:
 	float ChanceRangeFrom;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
 	float ChanceRangeTo;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	ETarget Target;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	EAction Action;
 };
 
 USTRUCT(BlueprintType)
-struct FST_DoomBonus
+struct FST_DoomInfluence
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_DoomBonus(FString Title = "", float ChanceBonus = 0.f)
-		: Title(Title)
-		, ChanceBonus(ChanceBonus)
+	FST_DoomInfluence(FString Id = "", FString Title = "", float Alteration = 0.f)
+		: Id(Id)
+		, Title(Title)
+		, Alteration(Alteration)
 	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	FString Id;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
 	FString Title;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
-	float ChanceBonus;
+	float Alteration;
 };
 
 
 //~~~~~ DATA IMPORT ~~~~~//
 
 USTRUCT(BlueprintType)
-struct FST_DoomEventNew : public FTableRowBase
+struct FST_DoomEvent : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_DoomEventNew(FString Id = "", FString Title = "", FString Description = "", TArray<FST_DoomOutcome> Outcomes = TArray<FST_DoomOutcome>())
+	FST_DoomEvent(FString Id = "", FString Title = "", FString Description = "", TArray<FST_DoomOutcome> Outcomes = TArray<FST_DoomOutcome>())
 		: Id(Id)
 		, Title(Title)
 		, Description(Description)
 		, Outcomes(Outcomes)
+		, Influences(Influences)
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
 	FString Id;
@@ -241,6 +267,8 @@ public:
 	FString Description;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
 	TArray<FST_DoomOutcome> Outcomes;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	TArray<FST_DoomInfluence> Influences;
 };
 
 USTRUCT(BlueprintType)

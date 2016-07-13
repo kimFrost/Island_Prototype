@@ -41,6 +41,7 @@ FString UIslandGameInstance::EnrichString(FString String, AIslandPerson* Person)
 
 
 
+
 /******************** AddTaskDone *************************/
 void UIslandGameInstance::AddTaskDone(FString Description, AIslandPerson* By, EUsefulRating Rating, ETaskType TaskType)
 {
