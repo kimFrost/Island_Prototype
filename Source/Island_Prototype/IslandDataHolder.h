@@ -207,12 +207,13 @@ struct FST_DoomOutcome
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_DoomOutcome(FString Title = "", float ChanceRangeFrom = 0.f, float ChanceRangeTo = 1.f, ETarget Target = ETarget::None, EAction Action = EAction::None)
+	FST_DoomOutcome(FString Title = "", float ChanceRangeFrom = 0.f, float ChanceRangeTo = 1.f, ETarget Target = ETarget::None, EAction ActionType = EAction::None, float ActionAmount = 0.f)
 		: Title(Title)
 		, ChanceRangeFrom(ChanceRangeFrom)
 		, ChanceRangeTo(ChanceRangeTo)
 		, Target(Target)
-		, Action(Action)
+		, ActionType(ActionType)
+		, ActionAmount(ActionAmount)
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
 	FString Title;
@@ -223,7 +224,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
 	ETarget Target;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
-	EAction Action;
+	EAction ActionType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	float ActionAmount;
 };
 
 USTRUCT(BlueprintType)

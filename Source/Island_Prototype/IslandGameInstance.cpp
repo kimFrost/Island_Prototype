@@ -41,6 +41,41 @@ FString UIslandGameInstance::EnrichString(FString String, AIslandPerson* Person)
 
 
 
+/******************** ParseAction *************************/
+void UIslandGameInstance::ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount)
+{
+	// Or just a array of people? What else could be subject for target action?
+
+	/*
+	AIslandPerson* TargetPerson = Cast<AIslandPerson>(Target);
+	if (TargetPerson)
+	{}
+	*/
+
+	if (Person)
+	{
+		switch (Action)
+		{
+			case EAction::TakeDamage:
+			{
+				if (TargetType == ETarget::Person)
+				{
+					//
+				}
+				else if (TargetType == ETarget::Group)
+				{
+
+				}
+				break;
+			}
+			default:
+				break;
+		}
+	}
+}
+
+
+
 
 /******************** AddTaskDone *************************/
 void UIslandGameInstance::AddTaskDone(FString Description, AIslandPerson* By, EUsefulRating Rating, ETaskType TaskType)
