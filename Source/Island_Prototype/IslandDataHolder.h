@@ -64,8 +64,10 @@ enum class EPersonState : uint8
 	Dehydrated UMETA(DisplayName = "Dehydrated")
 };
 
+// Maybe use levels instead? Hungry lv 1-3 -> Starving lv 1-3
+
 UENUM(BlueprintType)
-enum class EDeathCause : uint8
+enum class ECause : uint8
 {
 	Stavation UMETA(DisplayName = "Stavation"),
 	DoomEvent UMETA(DisplayName = "DoomEvent")
@@ -98,7 +100,9 @@ UENUM(BlueprintType)
 enum class EAction : uint8
 {
 	None UMETA(DisplayName = "None"),
-	TakeDamage UMETA(DisplayName = "Take damage")
+	TakeDamage UMETA(DisplayName = "Take damage"),
+	Die UMETA(DisplayName = "Die"),
+	Capture UMETA(DisplayName = "Capture")
 };
 
 
@@ -207,8 +211,9 @@ struct FST_DoomOutcome
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_DoomOutcome(FString Title = "", float ChanceRangeFrom = 0.f, float ChanceRangeTo = 1.f, ETarget Target = ETarget::None, EAction ActionType = EAction::None, float ActionAmount = 0.f)
+	FST_DoomOutcome(FString Title = "", FString Description = "", float ChanceRangeFrom = 0.f, float ChanceRangeTo = 1.f, ETarget Target = ETarget::None, EAction ActionType = EAction::None, float ActionAmount = 0.f)
 		: Title(Title)
+		, Description(Description)
 		, ChanceRangeFrom(ChanceRangeFrom)
 		, ChanceRangeTo(ChanceRangeTo)
 		, Target(Target)
@@ -217,6 +222,8 @@ public:
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
 	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	FString Description;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
 	float ChanceRangeFrom;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")

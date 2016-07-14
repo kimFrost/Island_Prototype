@@ -42,7 +42,7 @@ FString UIslandGameInstance::EnrichString(FString String, AIslandPerson* Person)
 
 
 /******************** ParseAction *************************/
-void UIslandGameInstance::ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount)
+void UIslandGameInstance::ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, ECause Cause)
 {
 	// Or just a array of people? What else could be subject for target action?
 
@@ -58,14 +58,7 @@ void UIslandGameInstance::ParseAction(ETarget TargetType, AIslandPerson* Person,
 		{
 			case EAction::TakeDamage:
 			{
-				if (TargetType == ETarget::Person)
-				{
-					//
-				}
-				else if (TargetType == ETarget::Group)
-				{
-
-				}
+				Person->TakeDamage(ECause::DoomEvent, Amount);
 				break;
 			}
 			default:

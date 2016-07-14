@@ -58,14 +58,14 @@ void AIslandPerson::Eat()
 }
 
 /******************** Die *************************/
-void AIslandPerson::Die(EDeathCause Cause)
+void AIslandPerson::Die(ECause Cause)
 {
 	UIslandGameInstance* GameInstance = Cast<UIslandGameInstance>(GetGameInstance());
 	if (GameInstance)
 	{
 		FString CauseString;
 
-		const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EDeathCause"), true);
+		const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("ECause"), true);
 		if (!EnumPtr) CauseString = FString("Invalid");
 		CauseString = EnumPtr->GetEnumName((int32)Cause);
 
@@ -77,7 +77,7 @@ void AIslandPerson::Die(EDeathCause Cause)
 }
 
 /******************** TakeDamage *************************/
-void AIslandPerson::TakeDamage(EDeathCause Cause, int32 Amount)
+void AIslandPerson::TakeDamage(ECause Cause, int32 Amount)
 {
 	HP -= Amount;
 	if (HP <= 0)
@@ -121,12 +121,12 @@ void AIslandPerson::ProcessStates()
 		{
 			if (States.Contains(EPersonState::Starving))
 			{
-				TakeDamage(EDeathCause::Stavation, 2);
+				TakeDamage(ECause::Stavation, 2);
 				GameInstance->AddNotification("%FIRSTNAME% is starving!", this, ENotificationType::Warning);
 			}
 			else if (States.Contains(EPersonState::Hungry))
 			{
-				TakeDamage(EDeathCause::Stavation, 1);
+				TakeDamage(ECause::Stavation, 1);
 				States.Remove(EPersonState::Hungry);
 				States.Add(EPersonState::Starving);
 				GameInstance->AddNotification("%FIRSTNAME% is now starving", this, ENotificationType::Warning);
@@ -138,7 +138,7 @@ void AIslandPerson::ProcessStates()
 			}
 			if (HP <= 0)
 			{
-				Die(EDeathCause::Stavation);
+				Die(ECause::Stavation);
 			}
 		}
 	}

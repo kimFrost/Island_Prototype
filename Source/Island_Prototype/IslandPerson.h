@@ -56,10 +56,10 @@ public:
 	void Eat();
 	
 	UFUNCTION(BlueprintCallable, Category = "Person")
-	void Die(EDeathCause Cause);
+	void Die(ECause Cause);
 
 	UFUNCTION(BlueprintCallable, Category = "Person")
-	void TakeDamage(EDeathCause Cause, int32 Amount);
+	void TakeDamage(ECause Cause, int32 Amount);
 
 	UFUNCTION(BlueprintCallable, Category = "Person")
 	void RegenHP(ERegenCause Cause, int32 Amount);

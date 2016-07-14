@@ -69,7 +69,7 @@ public:
 	FString EnrichString(FString String, AIslandPerson* Person);
 
 	UFUNCTION(BlueprintCallable, Category = "Util")
-	void ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount);
+	void ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, ECause Cause);
 
 	//~~ TASKS + NOTIFICATIONS ~~//
 
