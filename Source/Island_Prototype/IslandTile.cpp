@@ -37,6 +37,7 @@ AIslandTile::AIslandTile(const FObjectInitializer &ObjectInitializer) : Super(Ob
 	TranslationComp->Mobility = EComponentMobility::Static;
 	RootComponent = TranslationComp;
 
+	//~~ BaseMesh ~~//
 	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BaseMesh"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>BaseMeshObj(TEXT("StaticMesh'/Game/Island/Meshes/Tile/tile.tile'"));
 	if (BaseMeshObj.Succeeded())
@@ -44,6 +45,8 @@ AIslandTile::AIslandTile(const FObjectInitializer &ObjectInitializer) : Super(Ob
 		BaseMesh->SetStaticMesh(BaseMeshObj.Object);
 	}
 	BaseMesh->AttachParent = RootComponent;
+
+	//BaseMesh->SetRelativeScale3D(FVector(0.5f, 0.5f, 0.5f));
 
 	//~~ Indicator ~~//
 	MoveToIndicatorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MoveToIndicatorMesh"));
