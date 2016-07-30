@@ -15,6 +15,7 @@ AIslandPath::AIslandPath()
 	TileB = nullptr;
 	NumOfIntersections = 0;
 	bOneWay = false;
+	bSecret = false;
 	bVisible = false;
 
 	//~~ Root component ~~//

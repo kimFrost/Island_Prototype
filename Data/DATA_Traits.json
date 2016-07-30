@@ -1,0 +1,224 @@
+[
+	{
+		"Name": "Talker",
+		"Id": "Talker",
+		"Description": "",
+		"Rating": -1
+	},
+	{
+		"Name": "Quiet",
+		"Id": "Quiet",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Noisy",
+		"Id": "Noisy",
+		"Description": "",
+		"Rating": -1
+	},
+	{
+		"Name": "Handy",
+		"Id": "Handy",
+		"Description": "",
+		"Rating": 3
+	},
+	{
+		"Name": "Ignorant",
+		"Id": "Ignorant",
+		"Description": "",
+		"Rating": -1
+	},
+	{
+		"Name": "Lazy",
+		"Id": "Lazy",
+		"Description": "",
+		"Rating": -2
+	},
+	{
+		"Name": "Restless",
+		"Id": "Restless",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Selfish",
+		"Id": "Selfish",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Spoiled",
+		"Id": "Spoiled",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Brave",
+		"Id": "Brave",
+		"Description": "",
+		"Rating": 2
+	},
+	{
+		"Name": "Kindly",
+		"Id": "Kindly",
+		"Description": "",
+		"Rating": 1
+	},
+	{
+		"Name": "Bossy",
+		"Id": "Bossy",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Dreamer",
+		"Id": "Dreamer",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Helpful",
+		"Id": "Helpful",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Energetic",
+		"Id": "Energetic",
+		"Description": "",
+		"Rating": 1
+	},
+	{
+		"Name": "Unselfish",
+		"Id": "Unselfish",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Strong",
+		"Id": "Strong",
+		"Description": "",
+		"Rating": 3
+	},
+	{
+		"Name": "Humorous",
+		"Id": "Humorous",
+		"Description": "",
+		"Rating": 1
+	},
+	{
+		"Name": "Keen",
+		"Id": "Keen",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Honest",
+		"Id": "Honest",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Dishonest",
+		"Id": "Dishonest",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "HardWorking",
+		"Id": "HardWorking",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Neat",
+		"Id": "Neat",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Inspirational",
+		"Id": "Inspirational",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Arrogant",
+		"Id": "Arrogant",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Reckless",
+		"Id": "Reckless",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Manipulative",
+		"Id": "Manipulative",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "EasyGoing",
+		"Id": "EasyGoing",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Adventurous",
+		"Id": "Adventurous",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Cowardly",
+		"Id": "Cowardly",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Anxious",
+		"Id": "Anxious",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Materialistic",
+		"Id": "Materialistic",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Naive",
+		"Id": "Naive",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Secretive",
+		"Id": "Secretive",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Idealistic",
+		"Id": "Idealistic",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Fearless",
+		"Id": "Fearless",
+		"Description": "",
+		"Rating": 0
+	},
+	{
+		"Name": "Charming",
+		"Id": "Charming",
+		"Description": "",
+		"Rating": 0
+	}
+]

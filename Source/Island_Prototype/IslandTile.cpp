@@ -13,7 +13,6 @@ AIslandTile::AIslandTile(const FObjectInitializer &ObjectInitializer) : Super(Ob
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	IsCamp = false;
 	DistanceFromSelectedPerson = 0;
 
 	
@@ -27,9 +26,11 @@ AIslandTile::AIslandTile(const FObjectInitializer &ObjectInitializer) : Super(Ob
 
 	bTileExplored = false;
 	bTileHidden = true;
-	TileCanBeBypassed = false;
+	bIsStart = false;
+	bIsExit = false;
+	bTileCanBeBypassed = false;
 
-	Selected = false;
+	bSelected = false;
 
 	PathTo = TArray<AIslandTile*>();
 
@@ -264,7 +265,7 @@ void AIslandTile::SelectTile()
 	if (DynamicMaterial)
 	{
 		DynamicMaterial->SetVectorParameterValue("Color", FLinearColor::Yellow);
-		Selected = true;
+		bSelected = true;
 		MoveToIndicatorMesh->SetVisibility(true);
 	}
 }
@@ -276,7 +277,7 @@ void AIslandTile::DeselectTile()
 	if (DynamicMaterial)
 	{
 		DynamicMaterial->SetVectorParameterValue("Color", FLinearColor::Black);
-		Selected = false;
+		bSelected = false;
 		MoveToIndicatorMesh->SetVisibility(false);
 	}
 }

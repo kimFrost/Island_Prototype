@@ -1,0 +1,46 @@
+FST_Outcome
+	FString Title;
+	FString Description;
+	float ChanceRangeFrom;
+	float ChanceRangeTo;
+	ETarget Target;
+	EAction ActionType;
+	float ActionAmount;
+	
+	
+FST_Influence
+	FString Id;
+	FString Title;
+	float Alteration;
+
+	
+	
+	
+Fishing Stations
+	Outcome: 0-5
+		Heavy Failure: Station broken. Needs repair.
+	Outcome: 6-40
+		Failure
+	Outcome: 41-80
+		Success: Small fish
+	Outcome: 81-95
+		Huge success: Large fish
+	Outcome: 96-100
+		Lengendary success: Special item
+		
+		
+	Modifiers:
+		Clumsy -> Chance to get hurt by hook
+		Patient -> +10 to chance
+		Quiet -> +5 to chance
+		Dreamer -> 5% chance for Failure
+		EasyGoing -> 5% chance for Failure
+		Anxious -> 5% chance for Failure
+		Strong -> 3% chance to break station
+		
+		
+		
+		
+		
+Mayby not show math until after, during result at end of turn?
+Mayby an internal wiki. With the combo's that have been tried.

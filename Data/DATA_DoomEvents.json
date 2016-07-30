@@ -1,0 +1,25 @@
+[
+	{
+		"Name": "RapidDogs",
+		"Id": "RapidDogs",
+		"Title": "Rapid dogs",
+		"Description": "Rapid dogs roam around near the camp. Someone will have to handle the situtation.",
+		"Outcomes": [
+			"(Title=\"Fail\",Description=\"%FIRSTNAME% failed to scare the dogs aways, and got hurt in the process.\",ChanceRangeFrom=0.000000,ChanceRangeTo=0.700000,Target=Person,ActionType=TakeDamage,ActionAmount=2.000000)",
+			"(Title=\"Success\",Description=,ChanceRangeFrom=0.700000,ChanceRangeTo=1.000000,Target=None,ActionType=None,ActionAmount=0.000000)"
+		],
+		"Influences": [
+			"(Id=,Title=\"Brave\",Alteration=0.100000)"
+		]
+	},
+	{
+		"Name": "NativeSacrifice",
+		"Id": "NativeSacrifice",
+		"Title": "Native sacrifice",
+		"Description": "The natives demands a human sacrifice. Someone should go talk to them.",
+		"Outcomes": [
+			"(Title=\"Success\",Description=,ChanceRangeFrom=0.000000,ChanceRangeTo=1.000000,Target=None,ActionType=None,ActionAmount=0.000000)"
+		],
+		"Influences": []
+	}
+]

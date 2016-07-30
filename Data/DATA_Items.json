@@ -1,0 +1,175 @@
+[
+	{
+		"Name": "Mango",
+		"Id": "Mango",
+		"Title": "Mango",
+		"Description": "Its a mango fruit",
+		"Quantity": 0,
+		"Group": "Food",
+		"Tags": [
+			"Food",
+			"Flammable"
+		],
+		"Provides": "(Id=\"Food\",Quantity=0.500000)"
+	},
+	{
+		"Name": "Coconut",
+		"Id": "Coconut",
+		"Title": "Coconut",
+		"Description": "Its a coconut",
+		"Quantity": 0,
+		"Group": "Food",
+		"Tags": [
+			"Food",
+			"Flammable"
+		],
+		"Provides": "(Id=\"Food\",Quantity=0.500000)"
+	},
+	{
+		"Name": "FishSmall",
+		"Id": "FishSmall",
+		"Title": "Small fish",
+		"Description": "Its a small fish",
+		"Quantity": 0,
+		"Group": "Food",
+		"Tags": [
+			"Eatable",
+			"Flammable"
+		],
+		"Provides": "(Id=\"Food\",Quantity=0.750000)"
+	},
+	{
+		"Name": "FishLarge",
+		"Id": "FishLarge",
+		"Title": "Large fish",
+		"Description": "Its a large fish",
+		"Quantity": 0,
+		"Group": "Food",
+		"Tags": [
+			"Eatable",
+			"Flammable"
+		],
+		"Provides": "(Id=\"Food\",Quantity=1.500000)"
+	},
+	{
+		"Name": "CanOfFood",
+		"Id": "CanOfFood",
+		"Title": "Can of food",
+		"Description": "A can of food",
+		"Quantity": 0,
+		"Group": "Food",
+		"Tags": [
+			"Flammable",
+			"Eatable"
+		],
+		"Provides": "(Id=\"Food\",Quantity=1.000000)"
+	},
+	{
+		"Name": "IdolGoatHead",
+		"Id": "IdolGoatHead",
+		"Title": "Goat head idol",
+		"Description": "The idol of a goat head",
+		"Quantity": 0,
+		"Group": "Ritual",
+		"Tags": [
+			"Ritual"
+		],
+		"Provides": "(Id=,Quantity=0.000000)"
+	},
+	{
+		"Name": "JarOfRitualOil",
+		"Id": "JarOfRitualOil",
+		"Title": "Jar of ritual oil",
+		"Description": "A jar filled with oil used for rituals",
+		"Quantity": 0,
+		"Group": "Ritual",
+		"Tags": [
+			"Ritual"
+		],
+		"Provides": "(Id=,Quantity=0.000000)"
+	},
+	{
+		"Name": "Incense",
+		"Id": "Incense",
+		"Title": "Incense",
+		"Description": "Incense for use in rituals",
+		"Quantity": 0,
+		"Group": "Ritual",
+		"Tags": [
+			"Ritual"
+		],
+		"Provides": "(Id=,Quantity=0.000000)"
+	},
+	{
+		"Name": "SacrificialCup",
+		"Id": "SacrificialCup",
+		"Title": "Sacrificial cup",
+		"Description": "A cup for rituals",
+		"Quantity": 0,
+		"Group": "Ritual",
+		"Tags": [
+			"Ritual"
+		],
+		"Provides": "(Id=,Quantity=0.000000)"
+	},
+	{
+		"Name": "SacrificialKnife",
+		"Id": "SacrificialKnife",
+		"Title": "Sacrificial knife",
+		"Description": "A knife used for rituals",
+		"Quantity": 0,
+		"Group": "Ritual",
+		"Tags": [
+			"Ritual"
+		],
+		"Provides": "(Id=,Quantity=0.000000)"
+	},
+	{
+		"Name": "RitualCandle",
+		"Id": "RitualCandle",
+		"Title": "Ritual candle",
+		"Description": "A candle used for rituals",
+		"Quantity": 0,
+		"Group": "Ritual",
+		"Tags": [
+			"Ritual"
+		],
+		"Provides": "(Id=,Quantity=0.000000)"
+	},
+	{
+		"Name": "RitualDoll",
+		"Id": "RitualDoll",
+		"Title": "Ritual doll",
+		"Description": "A bit childish",
+		"Quantity": 0,
+		"Group": "Ritual",
+		"Tags": [
+			"Ritual"
+		],
+		"Provides": "(Id=,Quantity=0.000000)"
+	},
+	{
+		"Name": "Eyeliner",
+		"Id": "Eyeliner",
+		"Title": "Eyeliner",
+		"Description": "Perfect for looking really serious duing a ritual",
+		"Quantity": 0,
+		"Group": "Ritual",
+		"Tags": [
+			"Ritual"
+		],
+		"Provides": "(Id=,Quantity=0.000000)"
+	},
+	{
+		"Name": "RitualNecklace",
+		"Id": "RitualNecklace",
+		"Title": "Necklace",
+		"Description": "Adds a bit of fashion to a ritual. It says 1.99$ on the back.",
+		"Quantity": 0,
+		"Group": "Ritual",
+		"Tags": [
+			"Ritual"
+		],
+		"Provides": "(Id=,Quantity=0.000000)"
+	}
+]

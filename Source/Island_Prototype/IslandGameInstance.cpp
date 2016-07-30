@@ -68,6 +68,38 @@ void UIslandGameInstance::ParseAction(ETarget TargetType, AIslandPerson* Person,
 }
 
 
+/******************** ParseOutcome *************************/
+void UIslandGameInstance::ParseOutcome(FST_Outcome Outcome, AIslandPerson* Person, ECause Cause, bool AddUpdate)
+{
+	// Some complex shit goes here..
+	switch (Outcome.ActionType)
+	{
+		case EAction::GiveItem:
+		{
+			StoreItem(Outcome.ActionWildcard, Outcome.ActionAmount);
+			break;
+		}
+		case EAction::TakeDamage:
+		{
+			if (Person) Person->TakeDamage(Cause, Outcome.ActionAmount);
+			break;
+		}
+		case EAction::BreakStation:
+		{
+			if (Person)
+			{
+				// Find station though person and set broken state with ActionAmount
+			}
+			break;
+		}
+		default:
+			break;
+	}
+	if (AddUpdate)
+	{
+		AddTaskDone(Outcome.Description, Person, EUsefulRating::Neutral, ETaskType::Work);
+	}
+}
 
 
 /******************** AddTaskDone *************************/

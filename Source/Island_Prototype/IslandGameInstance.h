@@ -68,8 +68,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Util")
 	FString EnrichString(FString String, AIslandPerson* Person);
 
+	// Perform roll 
+
 	UFUNCTION(BlueprintCallable, Category = "Util")
 	void ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, ECause Cause);
+
+	UFUNCTION(BlueprintCallable, Category = "Util")
+	void ParseOutcome(FST_Outcome Outcome, AIslandPerson* Person, ECause Cause, bool AddUpdate = true);
 
 	//~~ TASKS + NOTIFICATIONS ~~//
 

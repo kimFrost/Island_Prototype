@@ -69,6 +69,9 @@ void AIslandPerson::Die(ECause Cause)
 		if (!EnumPtr) CauseString = FString("Invalid");
 		CauseString = EnumPtr->GetEnumName((int32)Cause);
 
+		//~~ Remove self from asigned slot on station ~~//
+		// I have no ref to station slot here...! What to do? I have a temp fix in blueprint binding to onDestroyed.
+
 		// Remove from list of people // Or maybe just give them a death state
 		GameInstance->People.Remove(this);
 		GameInstance->AddTaskDone("%FIRSTNAME% dies from " + CauseString, this, EUsefulRating::Neutral, ETaskType::Work);

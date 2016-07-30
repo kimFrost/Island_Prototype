@@ -34,6 +34,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Path")
 	bool bOneWay;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Path")
+	bool bSecret;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Path")
 	bool bVisible;
 

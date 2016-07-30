@@ -70,6 +70,7 @@ UENUM(BlueprintType)
 enum class ECause : uint8
 {
 	Stavation UMETA(DisplayName = "Stavation"),
+	Work UMETA(DisplayName = "Work"),
 	DoomEvent UMETA(DisplayName = "DoomEvent")
 };
 
@@ -92,8 +93,10 @@ UENUM(BlueprintType)
 enum class ETarget : uint8
 {
 	None UMETA(DisplayName = "None"),
+	Camp UMETA(DisplayName = "Camp"),
 	Group UMETA(DisplayName = "Group"),
-	Person UMETA(DisplayName = "Person")
+	Person UMETA(DisplayName = "Person"),
+	Station UMETA(DisplayName = "Station")
 };
 
 UENUM(BlueprintType)
@@ -101,6 +104,8 @@ enum class EAction : uint8
 {
 	None UMETA(DisplayName = "None"),
 	TakeDamage UMETA(DisplayName = "Take damage"),
+	BreakStation UMETA(DisplayName = "Break station"),
+	GiveItem UMETA(DisplayName = "Give item"),
 	Die UMETA(DisplayName = "Die"),
 	Capture UMETA(DisplayName = "Capture")
 };
@@ -207,11 +212,11 @@ public:
 };
 
 USTRUCT(BlueprintType)
-struct FST_DoomOutcome
+struct FST_Outcome
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_DoomOutcome(FString Title = "", FString Description = "", float ChanceRangeFrom = 0.f, float ChanceRangeTo = 1.f, ETarget Target = ETarget::None, EAction ActionType = EAction::None, float ActionAmount = 0.f)
+	FST_Outcome(FString Title = "", FString Description = "", float ChanceRangeFrom = 0.f, float ChanceRangeTo = 1.f, ETarget Target = ETarget::None, EAction ActionType = EAction::None, float ActionAmount = 0.f, FString ActionWildcard = "")
 		: Title(Title)
 		, Description(Description)
 		, ChanceRangeFrom(ChanceRangeFrom)
@@ -219,29 +224,32 @@ public:
 		, Target(Target)
 		, ActionType(ActionType)
 		, ActionAmount(ActionAmount)
+		, ActionWildcard(ActionWildcard)
 	{}
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Outcome")
 	FString Title;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Outcome")
 	FString Description;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Outcome")
 	float ChanceRangeFrom;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Outcome")
 	float ChanceRangeTo;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Outcome")
 	ETarget Target;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Outcome")
 	EAction ActionType;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Outcome")
 	float ActionAmount;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Outcome")
+	FString ActionWildcard;
 };
 
 USTRUCT(BlueprintType)
-struct FST_DoomInfluence
+struct FST_Influence
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_DoomInfluence(FString Id = "", FString Title = "", float Alteration = 0.f)
+	FST_Influence(FString Id = "", FString Title = "", float Alteration = 0.f)
 		: Id(Id)
 		, Title(Title)
 		, Alteration(Alteration)
@@ -255,6 +263,25 @@ public:
 };
 
 
+USTRUCT(BlueprintType)
+struct FST_Modifier
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Modifier(FString Target = "", FString TargetId = "", TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>())
+		: Target(Target)
+		, TargetId(TargetId)
+		, Outcomes(Outcomes)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	FString Target;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	FString TargetId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	TArray<FST_Outcome> Outcomes;
+};
+
+
 //~~~~~ DATA IMPORT ~~~~~//
 
 USTRUCT(BlueprintType)
@@ -262,7 +289,7 @@ struct FST_DoomEvent : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_DoomEvent(FString Id = "", FString Title = "", FString Description = "", TArray<FST_DoomOutcome> Outcomes = TArray<FST_DoomOutcome>())
+	FST_DoomEvent(FString Id = "", FString Title = "", FString Description = "", TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>())
 		: Id(Id)
 		, Title(Title)
 		, Description(Description)
@@ -276,10 +303,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
 	FString Description;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
-	TArray<FST_DoomOutcome> Outcomes;
+	TArray<FST_Outcome> Outcomes;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doom")
-	TArray<FST_DoomInfluence> Influences;
+	TArray<FST_Influence> Influences;
 };
+
 
 USTRUCT(BlueprintType)
 struct FST_Trait : public FTableRowBase
@@ -298,8 +326,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trait")
 	int32 Rating;
 };
-
-//FST_Trait(FString Id = "", FString Description = "", FST_Rating Rating = FST_Rating())
 
 
 USTRUCT(BlueprintType)
@@ -364,6 +390,95 @@ public:
 	FString Title;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString Description;
+};
+
+
+USTRUCT(BlueprintType)
+struct FST_Station : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Station(FString Id = "", FString Title = "", FString Description = "", TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>(), FString Group = "", TArray<FString> Tags = TArray<FString>())
+		: Id(Id)
+		, Title(Title)
+		, Description(Description)
+		, Outcomes(Outcomes)
+		, Influences(Influences)
+		, Tags(Tags)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	FString Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	FString Description;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	TArray<FST_Outcome> Outcomes;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	TArray<FST_Influence> Influences; 
+	
+	// Influences vs traits specifics?  Might not modify result chance, but result in something specific, damage, certain result, damage stations, etc.
+
+	// Modifiers
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	TArray<FString> Tags;
+
+	// Passive provides?
+
+};
+
+
+USTRUCT(BlueprintType)
+struct FST_Location : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Location(FString Id = "", FString Title = "", FString Description = "", int32 Quantity = 0, FString Group = "", TArray<FString> Tags = TArray<FString>(), FST_Provider Provides = FST_Provider())
+		: Id(Id)
+		, Title(Title)
+		, Description(Description)
+
+		, Quantity(Quantity)
+		, Group(Group)
+		, Tags(Tags)
+		, Provides()
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Location")
+	FString Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Location")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Location")
+	FString Description;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Location")
+	int32 Quantity;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Location")
+	FString Group;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Location")
+	TArray<FString> Tags;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Location")
+	FST_Provider Provides;
+
+	// Risk 
+
+	// Dangers.
+
+	// Rewards
+	// Tiers reward?
+
+	// Bonuses: Traits that fit.
+
+	// Penalties. Traits that doesn't fit.
+
+	// Or posisble items to find. 
+	// Items hidden until found once. In any location.
+
+	// Infinity items: Fish in stream. 
+
+	// Rituals that alter the locations stats.
+
 };
 
 

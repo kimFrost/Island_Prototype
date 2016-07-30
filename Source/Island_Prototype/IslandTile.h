@@ -23,7 +23,10 @@ public:
 	AIslandTile(const FObjectInitializer &ObjectInitializer);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tile")
-	bool IsCamp;
+	bool bIsStart;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tile")
+	bool bIsExit;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Path")
 	TArray<AIslandTile*> PathTo;
@@ -47,10 +50,10 @@ public:
 	bool bTileExplored;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tile")
-	bool TileCanBeBypassed;
+	bool bTileCanBeBypassed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tile")
-	bool Selected;
+	bool bSelected;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tile")
 	FST_Card TileCard;
