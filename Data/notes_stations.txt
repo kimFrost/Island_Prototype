@@ -44,3 +44,8 @@ Fishing Stations
 		
 Mayby not show math until after, during result at end of turn?
 Mayby an internal wiki. With the combo's that have been tried.
+
+
+Stations should both be workable or let the person asigned be workable. 
+So multiple people can work on one task or multiple people can work on seperate identical tasks. Per slot per workstation.
+Need a way to tell if station is the taskholder or the person is the taskholder.

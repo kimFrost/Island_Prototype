@@ -95,7 +95,6 @@ public:
 	void AddNotification(FString Msg, AIslandPerson* Concerning, ENotificationType Type);
 
 
-
 	//~~ RESOURCES ~~//
 
 	TMap<FString, FST_Item> StoredItems;

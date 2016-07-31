@@ -401,10 +401,12 @@ struct FST_Station : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Station(FString Id = "", FString Title = "", FString Description = "", TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>(), FString Group = "", TArray<FString> Tags = TArray<FString>())
+	FST_Station(FString Id = "", FString Title = "", FString Description = "", float WorkTime = 1.f, bool CombinedTask = false, TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>(), FString Group = "", TArray<FString> Tags = TArray<FString>())
 		: Id(Id)
 		, Title(Title)
 		, Description(Description)
+		, WorkTime(WorkTime)
+		, CombinedTask(CombinedTask)
 		, Outcomes(Outcomes)
 		, Influences(Influences)
 		, Tags(Tags)
@@ -415,6 +417,10 @@ public:
 	FString Title;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
 	FString Description;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	float WorkTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	bool CombinedTask;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
 	TArray<FST_Outcome> Outcomes;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
