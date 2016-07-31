@@ -216,7 +216,7 @@ struct FST_Outcome
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Outcome(FString Title = "", FString Description = "", float ChanceRangeFrom = 0.f, float ChanceRangeTo = 1.f, ETarget Target = ETarget::None, EAction ActionType = EAction::None, float ActionAmount = 0.f, FString ActionWildcard = "")
+	FST_Outcome(FString Title = "", FString Description = "", float ChanceRangeFrom = 0.f, float ChanceRangeTo = 1.f, ETarget Target = ETarget::None, EAction ActionType = EAction::None, float ActionAmount = 0.f, FString ActionWildcard = "", EUsefulRating Rating = EUsefulRating::Neutral)
 		: Title(Title)
 		, Description(Description)
 		, ChanceRangeFrom(ChanceRangeFrom)
@@ -225,6 +225,7 @@ public:
 		, ActionType(ActionType)
 		, ActionAmount(ActionAmount)
 		, ActionWildcard(ActionWildcard)
+		, Rating(Rating)
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Outcome")
 	FString Title;
@@ -242,6 +243,8 @@ public:
 	float ActionAmount;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Outcome")
 	FString ActionWildcard;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Outcome")
+	EUsefulRating Rating;
 };
 
 USTRUCT(BlueprintType)

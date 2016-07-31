@@ -40,6 +40,38 @@ FString UIslandGameInstance::EnrichString(FString String, AIslandPerson* Person)
 }
 
 
+/******************** GetRoll *************************/
+float UIslandGameInstance::GetRoll(AIslandPerson* Person, TArray<FST_Modifier> Modifiers)
+{
+	float Roll = 0.f;
+	
+	Roll = FMath::RandRange(0.f, 1.f);
+
+
+	// Useless index
+
+	// Traits + Modifiers matchup -> Outcomes
+
+	return Roll;
+}
+
+
+/******************** GetOutcome *************************/
+void UIslandGameInstance::GetOutcome(TArray<FST_Outcome> Outcomes, AIslandPerson* Person, TArray<FST_Modifier> Modifiers)
+{
+	float Roll = GetRoll(Person, Modifiers);
+	for (auto& Outcome : Outcomes)
+	{
+		if (Outcome.ChanceRangeFrom >= Roll && Outcome.ChanceRangeTo <= Roll)
+		{
+
+
+			break;
+		}
+	}
+
+}
+
 
 /******************** ParseAction *************************/
 void UIslandGameInstance::ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, ECause Cause)

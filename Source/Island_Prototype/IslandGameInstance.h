@@ -68,7 +68,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Util")
 	FString EnrichString(FString String, AIslandPerson* Person);
 
-	// Perform roll 
+	UFUNCTION(BlueprintCallable, Category = "Util")
+	float GetRoll(AIslandPerson* Person, TArray<FST_Modifier> Modifiers);
+
+	UFUNCTION(BlueprintCallable, Category = "Util")
+	void GetOutcome(TArray<FST_Outcome> Outcomes, AIslandPerson* Person, TArray<FST_Modifier> Modifiers);
 
 	UFUNCTION(BlueprintCallable, Category = "Util")
 	void ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, ECause Cause);
