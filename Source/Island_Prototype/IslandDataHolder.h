@@ -290,11 +290,14 @@ struct FST_Task
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Task(float WorkTime = 1.f, TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>())
-		: WorkTime(WorkTime)
+	FST_Task(FString Title = "", float WorkTime = 1.f, TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>())
+		: Title(Title)
+		, WorkTime(WorkTime)
 		, Outcomes(Outcomes)
 		, Influences(Influences)
 	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	FString Title;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
 	float WorkTime;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")

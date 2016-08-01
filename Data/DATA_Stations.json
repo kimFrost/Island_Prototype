@@ -4,7 +4,8 @@
 		"Id": "FishingStation",
 		"Title": "Fishing station",
 		"Description": "A place to fish in the sea",
-		"Task": "(WorkTime=10,
+		"Task": "(Title=\"Fishing\",
+			WorkTime=10,
 			Outcomes=(
 				(Title=\"Heavy Failure\", Description=\"%FIRSTNAME% broke the fishing rig.\",ChanceRangeFrom=0.0, ChanceRangeTo=0.05, Target=Person, ActionType=BreakStation, ActionAmount=1.0),
 				(Title=\"Failure\", Description=\"%FIRSTNAME% failed to catch anything.\", ChanceRangeFrom=0.05, ChanceRangeTo=0.4, Target=None, ActionType=None, ActionAmount=0.0),
