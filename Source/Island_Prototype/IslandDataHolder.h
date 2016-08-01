@@ -285,6 +285,24 @@ public:
 };
 
 
+USTRUCT(BlueprintType)
+struct FST_Task
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Task(float WorkTime = 1.f, TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>())
+		: WorkTime(WorkTime)
+		, Outcomes(Outcomes)
+		, Influences(Influences)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	float WorkTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	TArray<FST_Outcome> Outcomes;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	TArray<FST_Influence> Influences; 
+};
+
 //~~~~~ DATA IMPORT ~~~~~//
 
 USTRUCT(BlueprintType)
@@ -401,14 +419,12 @@ struct FST_Station : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Station(FString Id = "", FString Title = "", FString Description = "", float WorkTime = 1.f, bool CombinedTask = false, TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>(), FString Group = "", TArray<FString> Tags = TArray<FString>())
+	FST_Station(FString Id = "", FString Title = "", FString Description = "", FST_Task Task = FST_Task(), bool CombinedTask = false, TArray<FString> Tags = TArray<FString>())
 		: Id(Id)
 		, Title(Title)
 		, Description(Description)
-		, WorkTime(WorkTime)
+		, Task(Task)
 		, CombinedTask(CombinedTask)
-		, Outcomes(Outcomes)
-		, Influences(Influences)
 		, Tags(Tags)
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
@@ -417,15 +433,23 @@ public:
 	FString Title;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
 	FString Description;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
-	float WorkTime;
+	FST_Task Task;
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
 	bool CombinedTask;
+
+	/*
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	float WorkTime;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
 	TArray<FST_Outcome> Outcomes;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
 	TArray<FST_Influence> Influences; 
-	
+	*/
+
 	// Influences vs traits specifics?  Might not modify result chance, but result in something specific, damage, certain result, damage stations, etc.
 
 	// Modifiers
