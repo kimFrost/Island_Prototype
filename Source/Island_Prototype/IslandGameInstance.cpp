@@ -57,19 +57,19 @@ float UIslandGameInstance::GetRoll(AIslandPerson* Person, TArray<FST_Modifier> M
 
 
 /******************** GetOutcome *************************/
-void UIslandGameInstance::GetOutcome(TArray<FST_Outcome> Outcomes, AIslandPerson* Person, TArray<FST_Modifier> Modifiers)
+FST_Outcome UIslandGameInstance::GetOutcome(TArray<FST_Outcome> Outcomes, AIslandPerson* Person, TArray<FST_Modifier> Modifiers)
 {
+	FST_Outcome ResultOutcome;
 	float Roll = GetRoll(Person, Modifiers);
 	for (auto& Outcome : Outcomes)
 	{
-		if (Outcome.ChanceRangeFrom >= Roll && Outcome.ChanceRangeTo <= Roll)
+		if (Roll >= Outcome.ChanceRangeFrom && Roll <= Outcome.ChanceRangeTo)
 		{
-
-
+			ResultOutcome = Outcome;
 			break;
 		}
 	}
-
+	return ResultOutcome;
 }
 
 
@@ -120,7 +120,7 @@ void UIslandGameInstance::ParseOutcome(FST_Outcome Outcome, AIslandPerson* Perso
 		{
 			if (Person)
 			{
-				// Find station though person and set broken state with ActionAmount
+				// Find station though person and set brken state with ActionAmount
 			}
 			break;
 		}
@@ -398,6 +398,10 @@ TArray<FST_Item> UIslandGameInstance::RequestResource(FString Id, float Quantity
 		Items.Add(Item.Value);
 	}
 
+	OnIventoryUpdated.Broadcast();
+
+	//GameInstance->OnPersonMoveEnded.Broadcast(this, TilePlacedOn);
+
 	//~~ Return item ~~//
 	return Items;
 }
@@ -469,6 +473,7 @@ FST_Item UIslandGameInstance::StoreItem(FString Id, int Quantity) {
 			}
 		}
 	}
+	OnIventoryUpdated.Broadcast(); 
 	return Item;
 }
 

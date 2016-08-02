@@ -48,6 +48,10 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAnyTileRevealed, AIslandTile*, Tile
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPersonMoveEnded, AIslandPerson*, Person, AIslandTile*, Tile);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPersonSelected, AIslandPerson*, Person);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemAdded, FST_Item, Item);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FIventoryUpdated);
+
 
 
 /**
@@ -72,7 +76,7 @@ public:
 	float GetRoll(AIslandPerson* Person, TArray<FST_Modifier> Modifiers);
 
 	UFUNCTION(BlueprintCallable, Category = "Util")
-	void GetOutcome(TArray<FST_Outcome> Outcomes, AIslandPerson* Person, TArray<FST_Modifier> Modifiers);
+	FST_Outcome GetOutcome(TArray<FST_Outcome> Outcomes, AIslandPerson* Person, TArray<FST_Modifier> Modifiers);
 
 	UFUNCTION(BlueprintCallable, Category = "Util")
 	void ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, ECause Cause);
@@ -157,5 +161,11 @@ public:
 
 	//UPROPERTY(BlueprintAssignable, Category = "Input")
 	FPersonSelected OnPersonSelected;
+
+	UPROPERTY(BlueprintAssignable, Category = "Resources")
+	FItemAdded OnItemAdded;
+
+	UPROPERTY(BlueprintAssignable, Category = "Resources")
+	FIventoryUpdated OnIventoryUpdated;
 
 };

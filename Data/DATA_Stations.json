@@ -7,11 +7,34 @@
 		"Task": "(Title=\"Fishing\",
 			WorkTime=10,
 			Outcomes=(
-				(Title=\"Heavy Failure\", Description=\"%FIRSTNAME% broke the fishing rig.\",ChanceRangeFrom=0.0, ChanceRangeTo=0.05, Target=Person, ActionType=BreakStation, ActionAmount=1.0),
-				(Title=\"Failure\", Description=\"%FIRSTNAME% failed to catch anything.\", ChanceRangeFrom=0.05, ChanceRangeTo=0.4, Target=None, ActionType=None, ActionAmount=0.0),
-				(Title=\"Success\", Description=\"%FIRSTNAME% caught a small fish.\", ChanceRangeFrom=0.4, ChanceRangeTo=0.8, Target=Camp, ActionType=GiveItem, ActionAmount=1.0, ActionWildcard=\"FishSmall\"),
-				(Title=\"Huge success\", Description=\"%FIRSTNAME% caught a large fish.\", ChanceRangeFrom=0.8, ChanceRangeTo=0.95, Target=Camp, ActionType=GiveItem, ActionAmount=1.0, ActionWildcard=\"FishLarge\"),
-				(Title=\"Legendary success\", Description=\"%FIRSTNAME% failed to catch anything.\", ChanceRangeFrom=0.95, ChanceRangeTo=1.0, Target=Camp, ActionType=GiveItem, ActionAmount=0.0)
+				(Title=\"Heavy Failure\", Description=\"%FIRSTNAME% broke the fishing rig.\",ChanceRangeFrom=0.0, ChanceRangeTo=0.05, Target=Person, ActionType=BreakStation, ActionAmount=1.0, Rating=UtterlyUseless),
+				(Title=\"Failure\", Description=\"%FIRSTNAME% failed to catch anything.\", ChanceRangeFrom=0.05, ChanceRangeTo=0.4, Target=None, ActionType=None, ActionAmount=0.0, Rating=Useless),
+				(Title=\"Success\", Description=\"%FIRSTNAME% caught a small fish.\", ChanceRangeFrom=0.4, ChanceRangeTo=0.8, Target=Camp, ActionType=GiveItem, ActionAmount=1.0, ActionWildcard=\"FishSmall\", Rating=Useful),
+				(Title=\"Huge success\", Description=\"%FIRSTNAME% caught a large fish.\", ChanceRangeFrom=0.8, ChanceRangeTo=0.95, Target=Camp, ActionType=GiveItem, ActionAmount=1.0, ActionWildcard=\"FishLarge\", Rating=Useful),
+				(Title=\"Legendary success\", Description=\"%FIRSTNAME% failed to catch anything.\", ChanceRangeFrom=0.95, ChanceRangeTo=1.0, Target=Camp, ActionType=GiveItem, ActionAmount=0.0, Rating=VeryUseful)
+			),
+			Influences=(
+				(Id=,Title=\"Brave\",Alteration=0.100000)
+			)
+		)",
+		"CombinedTask": false,
+		"Tags": [
+			
+		]
+	},
+	{
+		"Name": "GatheringStation",
+		"Id": "GatheringStation",
+		"Title": "Gathering station",
+		"Description": "A place to gather",
+		"Task": "(Title=\"Gathering\",
+			WorkTime=2,
+			Outcomes=(
+				(Title=\"Heavy Failure\", Description=\"%FIRSTNAME% broke the fishing rig.\",ChanceRangeFrom=0.0, ChanceRangeTo=0.05, Target=Person, ActionType=BreakStation, ActionAmount=1.0, Rating=UtterlyUseless),
+				(Title=\"Failure\", Description=\"%FIRSTNAME% failed to catch anything.\", ChanceRangeFrom=0.05, ChanceRangeTo=0.4, Target=None, ActionType=None, ActionAmount=0.0, Rating=Useless),
+				(Title=\"Success\", Description=\"%FIRSTNAME% caught a small fish.\", ChanceRangeFrom=0.4, ChanceRangeTo=0.8, Target=Camp, ActionType=GiveItem, ActionAmount=1.0, ActionWildcard=\"FishSmall\", Rating=Useful),
+				(Title=\"Huge success\", Description=\"%FIRSTNAME% caught a large fish.\", ChanceRangeFrom=0.8, ChanceRangeTo=0.95, Target=Camp, ActionType=GiveItem, ActionAmount=1.0, ActionWildcard=\"FishLarge\", Rating=Useful),
+				(Title=\"Legendary success\", Description=\"%FIRSTNAME% failed to catch anything.\", ChanceRangeFrom=0.95, ChanceRangeTo=1.0, Target=Camp, ActionType=GiveItem, ActionAmount=0.0, Rating=VeryUseful)
 			),
 			Influences=(
 				(Id=,Title=\"Brave\",Alteration=0.100000)
