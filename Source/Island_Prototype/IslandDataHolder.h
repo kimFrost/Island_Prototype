@@ -106,6 +106,7 @@ enum class EAction : uint8
 	TakeDamage UMETA(DisplayName = "Take damage"),
 	BreakStation UMETA(DisplayName = "Break station"),
 	GiveItem UMETA(DisplayName = "Give item"),
+	GiveItemFromGroup UMETA(DisplayName = "Give item from group"),
 	Die UMETA(DisplayName = "Die"),
 	Capture UMETA(DisplayName = "Capture")
 };
@@ -365,6 +366,22 @@ public:
 	FString Id;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Profession")
 	FString Description;
+};
+
+
+USTRUCT(BlueprintType)
+struct FST_ItemCollection : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_ItemCollection(FString Id = "", TArray<FString> ItemIds = TArray<FString>())
+		: Id(Id)
+		, ItemIds(ItemIds)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FString Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	TArray<FString> ItemIds;
 };
 
 

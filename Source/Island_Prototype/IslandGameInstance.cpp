@@ -25,7 +25,12 @@ void UIslandGameInstance::ReadTables()
 	{
 		DATA_Items = ItemTable;
 	}
-
+	//~~ Item groups ~~//
+	UDataTable* ItemCollectionsTable = (UDataTable*)StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("DataTable'/Game/Island/Util/Structs/DATA_ItemCollections.DATA_ItemCollections'"));
+	if (ItemCollectionsTable)
+	{
+		DATA_ItemCollections = ItemCollectionsTable;
+	}
 }
 
 
@@ -74,7 +79,7 @@ FST_Outcome UIslandGameInstance::GetOutcome(TArray<FST_Outcome> Outcomes, AIslan
 
 
 /******************** ParseAction *************************/
-void UIslandGameInstance::ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, ECause Cause)
+void UIslandGameInstance::ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, FString Wildcard, ECause Cause)
 {
 	// Or just a array of people? What else could be subject for target action?
 
@@ -84,36 +89,20 @@ void UIslandGameInstance::ParseAction(ETarget TargetType, AIslandPerson* Person,
 	{}
 	*/
 
-	if (Person)
-	{
-		switch (Action)
-		{
-			case EAction::TakeDamage:
-			{
-				Person->TakeDamage(ECause::DoomEvent, Amount);
-				break;
-			}
-			default:
-				break;
-		}
-	}
-}
-
-
-/******************** ParseOutcome *************************/
-void UIslandGameInstance::ParseOutcome(FST_Outcome Outcome, AIslandPerson* Person, ECause Cause, bool AddUpdate)
-{
 	// Some complex shit goes here..
-	switch (Outcome.ActionType)
+	switch (Action)
 	{
 		case EAction::GiveItem:
 		{
-			StoreItem(Outcome.ActionWildcard, Outcome.ActionAmount);
+			StoreItem(Wildcard, Amount);
 			break;
 		}
+		case EAction::GiveItemFromGroup:
+
+			break;
 		case EAction::TakeDamage:
 		{
-			if (Person) Person->TakeDamage(Cause, Outcome.ActionAmount);
+			if (Person) Person->TakeDamage(Cause, Amount);
 			break;
 		}
 		case EAction::BreakStation:
@@ -127,6 +116,14 @@ void UIslandGameInstance::ParseOutcome(FST_Outcome Outcome, AIslandPerson* Perso
 		default:
 			break;
 	}
+	
+}
+
+
+/******************** ParseOutcome *************************/
+void UIslandGameInstance::ParseOutcome(FST_Outcome Outcome, AIslandPerson* Person, ECause Cause, bool AddUpdate)
+{
+	ParseAction(Outcome.Target, Person, Outcome.ActionType, Outcome.ActionAmount, Outcome.ActionWildcard, Cause);
 	if (AddUpdate)
 	{
 		AddTaskDone(Outcome.Description, Person, EUsefulRating::Neutral, ETaskType::Work);

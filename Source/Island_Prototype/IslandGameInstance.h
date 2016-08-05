@@ -79,10 +79,11 @@ public:
 	FST_Outcome GetOutcome(TArray<FST_Outcome> Outcomes, AIslandPerson* Person, TArray<FST_Modifier> Modifiers);
 
 	UFUNCTION(BlueprintCallable, Category = "Util")
-	void ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, ECause Cause);
+	void ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, FString Wildcard, ECause Cause);
 
 	UFUNCTION(BlueprintCallable, Category = "Util")
 	void ParseOutcome(FST_Outcome Outcome, AIslandPerson* Person, ECause Cause, bool AddUpdate = true);
+
 
 	//~~ TASKS + NOTIFICATIONS ~~//
 
@@ -112,6 +113,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Data")
 	UDataTable* DATA_Items;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Data")
+	UDataTable* DATA_ItemCollections;
 
 	UFUNCTION(BlueprintCallable, Category = "Data")
 	void ReadTables();

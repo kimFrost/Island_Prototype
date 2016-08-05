@@ -1,0 +1,17 @@
+[
+	{
+		"Name": "FishingSea",
+		"Id": "FishingSea",
+		"ItemIds": [
+			"FishSmall",
+			"FishLarge"
+		]
+	},
+	{
+		"Name": "FishingSeaRewardSmall",
+		"Id": "FishingSeaRewardSmall",
+		"ItemIds": [
+			"FishSmall"
+		]
+	}
+]
