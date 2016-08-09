@@ -134,6 +134,7 @@ void UIslandGameInstance::ParseOutcome(FST_Outcome Outcome, AIslandPerson* Perso
 /******************** AddTaskDone *************************/
 void UIslandGameInstance::AddTaskDone(FString Description, AIslandPerson* By, EUsefulRating Rating, ETaskType TaskType)
 {
+	// Use AddTaskDone in Hud instead. Which will make a notification
 	FST_TaskDone DoneTask = FST_TaskDone(EnrichString(Description, By), By, Rating, TaskType);
 	TasksDoneThisTurn.Add(DoneTask);
 	if (By)
