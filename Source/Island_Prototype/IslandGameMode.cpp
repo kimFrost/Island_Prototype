@@ -17,6 +17,11 @@ AIslandGameMode::AIslandGameMode(const FObjectInitializer &ObjectInitializer) : 
 }
 
 
+void AIslandGameMode::SetTimeRate(float Rate)
+{
+	TimeSpeed = Rate;
+}
+
 
 void AIslandGameMode::Tick(float DeltaTime)
 {

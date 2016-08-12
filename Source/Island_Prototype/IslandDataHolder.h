@@ -291,7 +291,7 @@ struct FST_Task
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Task(FString Title = "", float WorkTime = 1.f, TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>())
+	FST_Task(FString Title = "", float WorkTime = 0.f, TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>())
 		: Title(Title)
 		, WorkTime(WorkTime)
 		, Outcomes(Outcomes)

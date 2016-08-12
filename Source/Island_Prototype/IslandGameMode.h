@@ -31,7 +31,11 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Time")
 	float TimeSpeed;
+
 	
+	UFUNCTION(BlueprintCallable, Category = "Time")
+	void SetTimeRate(float Rate);
+
 	//~~ Overrides ~~//
 
 	virtual void Tick(float DeltaTime) override;
