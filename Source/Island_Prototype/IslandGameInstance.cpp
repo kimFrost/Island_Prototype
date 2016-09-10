@@ -62,6 +62,19 @@ float UIslandGameInstance::GetRoll(AIslandPerson* Person, TArray<FST_Modifier> M
 
 
 /******************** GetOutcome *************************/
+FST_Outcome UIslandGameInstance::GetOutcome(FST_Task& Task, TArray<AIslandPerson*> People, TArray<FST_Modifier> Modifiers)
+{
+	FST_Outcome ResultOutcome;
+
+	// Pase people's traits, habits, make combined skill roll based on skills and uselessness if multi-task.
+
+	//ResultOutcome.Description
+	//ResultOutcome.
+
+	return ResultOutcome;
+}
+
+/*
 FST_Outcome UIslandGameInstance::GetOutcome(TArray<FST_Outcome> Outcomes, AIslandPerson* Person, TArray<FST_Modifier> Modifiers)
 {
 	FST_Outcome ResultOutcome;
@@ -76,7 +89,7 @@ FST_Outcome UIslandGameInstance::GetOutcome(TArray<FST_Outcome> Outcomes, AIslan
 	}
 	return ResultOutcome;
 }
-
+*/
 
 /******************** ParseAction *************************/
 void UIslandGameInstance::ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, FString Wildcard, ECause Cause)

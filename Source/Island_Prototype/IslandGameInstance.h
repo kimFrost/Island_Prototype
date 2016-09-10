@@ -76,7 +76,8 @@ public:
 	float GetRoll(AIslandPerson* Person, TArray<FST_Modifier> Modifiers);
 
 	UFUNCTION(BlueprintCallable, Category = "Util")
-	FST_Outcome GetOutcome(TArray<FST_Outcome> Outcomes, AIslandPerson* Person, TArray<FST_Modifier> Modifiers);
+	FST_Outcome GetOutcome(FST_Task& Task, TArray<AIslandPerson*> People, TArray<FST_Modifier> Modifiers);
+	//FST_Outcome GetOutcome(TArray<FST_Outcome> Outcomes, AIslandPerson* Person, TArray<FST_Modifier> Modifiers);
 
 	UFUNCTION(BlueprintCallable, Category = "Util")
 	void ParseAction(ETarget TargetType, AIslandPerson* Person, EAction Action, float Amount, FString Wildcard, ECause Cause);
