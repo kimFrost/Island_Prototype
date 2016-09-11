@@ -77,7 +77,6 @@ float AIslandStation::WorkTask(AIslandPerson* Person, float AmountTime)
 {
 	if (CurrentTask.Progress < 1)
 	{
-		Person->bIsWorking = true;
 		CurrentTask.Progress += AmountTime / CurrentTask.WorkTime;
 		if (CurrentTask.Progress >= 1)
 		{
@@ -104,7 +103,6 @@ void AIslandStation::CompleteTask()
 
 
 	}
-
 	// Get new copy of base task
 	//ResetTask() wait for modal choice to reset task
 }
