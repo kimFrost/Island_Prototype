@@ -34,8 +34,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	TArray<FST_TaskDone> TasksDoneThisTurn;
 
-	// Task cache for personal tasks, that cannot be shared with other. Etc excerise, improving self.
-	TMap<FString, float> TaskCache;
+	// Task cache for personal tasks, that cannot be shared with other. Etc excerise, improving self. 
+	//TMap<FString, float> TaskCache;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	TArray<FST_Task> TaskCache;
+
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
+	//FST_Task& TaskWorkingOn = FST_Task();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
 	TArray<EPersonState> States;

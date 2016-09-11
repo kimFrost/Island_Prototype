@@ -38,6 +38,7 @@ enum class EGameState : uint8
 //~~~~~ Forward Declarations ~~~~~//
 class AIslandTile;
 class AIslandPerson;
+class AIslandStation;
 
 
 //~~~~~ Delegates/Event dispatcher ~~~~~//
@@ -51,6 +52,8 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPersonSelected, AIslandPerson*, Per
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemAdded, FST_Item, Item);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FIventoryUpdated);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTaskCompleted, FST_Task, Task, AIslandStation*, Station);
 
 
 
@@ -108,7 +111,7 @@ public:
 
 	//~~ PEOPLE ~~//
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Data")
-	TArray<AIslandPerson*> People;
+	TArray<AIslandPerson*> IslandPeople;
 
 	//~~ DATA ~~//
 
@@ -175,5 +178,8 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "Resources")
 	FIventoryUpdated OnIventoryUpdated;
+
+	UPROPERTY(BlueprintAssignable, Category = "Task")
+	FTaskCompleted OnTaskCompleted;
 
 };

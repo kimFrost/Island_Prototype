@@ -44,8 +44,9 @@ AIslandTile::AIslandTile(const FObjectInitializer &ObjectInitializer) : Super(Ob
 	if (BaseMeshObj.Succeeded())
 	{
 		BaseMesh->SetStaticMesh(BaseMeshObj.Object);
+		BaseMesh->SetupAttachment(RootComponent); 
 	}
-	BaseMesh->AttachParent = RootComponent;
+	//BaseMesh->AttachParent = RootComponent;
 
 	//BaseMesh->SetRelativeScale3D(FVector(0.5f, 0.5f, 0.5f));
 
@@ -61,12 +62,13 @@ AIslandTile::AIslandTile(const FObjectInitializer &ObjectInitializer) : Super(Ob
 	if (MoveToIndicatorMaterialObj.Succeeded())
 	{
 		MoveToIndicatorMesh->SetMaterial(0, MoveToIndicatorMaterialObj.Object);
+		MoveToIndicatorMesh->SetupAttachment(RootComponent);
 	}
 
 	MoveToIndicatorMesh->SetRelativeScale3D(FVector(3.f, 3.f, 3.f));
 	MoveToIndicatorMesh->SetRelativeRotation(FRotator(180.f, 0.f, 0.f));
 	MoveToIndicatorMesh->RelativeLocation = FVector(0, 0, 260);
-	MoveToIndicatorMesh->AttachParent = RootComponent;
+	//MoveToIndicatorMesh->AttachParent = RootComponent;
 	MoveToIndicatorMesh->SetVisibility(false);
 	MoveToIndicatorMesh->SetCastShadow(false);
 }

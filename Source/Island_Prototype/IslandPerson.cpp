@@ -18,6 +18,8 @@ AIslandPerson::AIslandPerson()
 	FirstName = "";
 	LastName = "";
 
+	//TaskWorkingOn = FST_Task();
+
 	UselessIndex = 0;
 
 	MaxHP = 3;
@@ -73,7 +75,7 @@ void AIslandPerson::Die(ECause Cause)
 		// I have no ref to station slot here...! What to do? I have a temp fix in blueprint binding to onDestroyed.
 
 		// Remove from list of people // Or maybe just give them a death state
-		GameInstance->People.Remove(this);
+		GameInstance->IslandPeople.Remove(this);
 		GameInstance->AddTaskDone("%FIRSTNAME% dies from " + CauseString, this, EUsefulRating::Neutral, ETaskType::Work);
 		this->Destroy();
 	}

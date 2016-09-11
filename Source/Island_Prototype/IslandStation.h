@@ -14,7 +14,10 @@ class ISLAND_PROTOTYPE_API AIslandStation : public AActor
 	
 public:	
 	// Sets default values for this actor's properties
-	AIslandStation();
+	AIslandStation(const FObjectInitializer &ObjectInitializer);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	TArray<AIslandPerson*> PeopleStationed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
 	FST_Station StationRowData;
@@ -28,19 +31,29 @@ public:
 	// Should a working task always be stored in TaskCache?? Yes, prop
 
 	// Cache for task that can be shared across people. Used both for single- and multitasking. Etc building a product.
-	TMap<FString, float> TaskCache;
+	//TMap<FString, float> TaskCache;0
+	//TMap<FST_Task, float> TaskCache;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	//TArray<FST_Task> TaskCache;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	FST_Task CurrentTask;
 
 	UFUNCTION(BlueprintCallable, Category = "Data")
 	void LoadStationData();
 
 	UFUNCTION(BlueprintCallable, Category = "Task")
-	FST_Task GetTask(AIslandPerson* Person, FString TaskId);
+	FST_Task GetTask(); // Only support one task for now
 
-	//float WorkTask(AIslandPerson* Person, float Amount); returns progress
+	UFUNCTION(BlueprintCallable, Category = "Task")
+	float WorkTask(AIslandPerson* Person, float AmountTime); //returns progress
+
+	UFUNCTION(BlueprintCallable, Category = "Task")
+	void CompleteTask();
 
 	//void CompleteTask();
 
-	//void CancelTask();
+	//void CancelTask(); 
 
 
 	// Called when the game starts or when spawned

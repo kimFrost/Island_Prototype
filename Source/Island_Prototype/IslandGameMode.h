@@ -3,7 +3,11 @@
 #pragma once
 
 #include "GameFramework/GameMode.h"
+#include "IslandDataHolder.h"
+#include "IslandStation.h"
 #include "IslandGameMode.generated.h"
+
+
 
 /**
  * 
@@ -18,7 +22,7 @@ public:
 	// Sets default values for this's properties
 	AIslandGameMode(const FObjectInitializer &ObjectInitializer);
 
-	//~~ TIME ~~//
+	//~~ TIME - var ~~//
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Time")
 	float TimeOfDay;
@@ -32,9 +36,11 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Time")
 	float TimeSpeed;
 
-	
+	//~~ TIME - func ~~//
+
 	UFUNCTION(BlueprintCallable, Category = "Time")
 	void SetTimeRate(float Rate);
+
 
 	//~~ Overrides ~~//
 
