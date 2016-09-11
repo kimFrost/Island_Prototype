@@ -34,6 +34,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	TArray<FST_TaskDone> TasksDoneThisTurn;
 
+	// Task cache for personal tasks, that cannot be shared with other. Etc excerise, improving self.
+	TMap<FString, float> TaskCache;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
 	TArray<EPersonState> States;
 
@@ -59,7 +62,7 @@ public:
 	void Die(ECause Cause);
 
 	UFUNCTION(BlueprintCallable, Category = "Person")
-	void TakeDamage(ECause Cause, int32 Amount);
+	void TakeHPDamage(ECause Cause, int32 Amount);
 
 	UFUNCTION(BlueprintCallable, Category = "Person")
 	void RegenHP(ERegenCause Cause, int32 Amount);

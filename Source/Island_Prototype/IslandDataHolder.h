@@ -291,11 +291,13 @@ struct FST_Task
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Task(FString Title = "", float WorkTime = 0.f, bool bIsCancelable = true, bool bIsCacheable = false, TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>())
+	FST_Task(FString Title = "", float WorkTime = 0.f, float Progress = 0.f, bool bIsCancelable = true, bool bIsCacheable = false, bool bIsShareable = true, TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>())
 		: Title(Title)
 		, WorkTime(WorkTime)
+		, Progress(Progress)
 		, bIsCancelable(bIsCancelable)
 		, bIsCacheable(bIsCacheable)
+		, bIsShareable(bIsShareable)
 		, Outcomes(Outcomes)
 		, Influences(Influences)
 	{}
@@ -304,9 +306,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
 	float WorkTime;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	float Progress;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
 	bool bIsCancelable;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
 	bool bIsCacheable;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	bool bIsShareable;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
 	TArray<FST_Outcome> Outcomes;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")

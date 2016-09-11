@@ -79,8 +79,8 @@ void AIslandPerson::Die(ECause Cause)
 	}
 }
 
-/******************** TakeDamage *************************/
-void AIslandPerson::TakeDamage(ECause Cause, int32 Amount)
+/******************** TakeHPDamage *************************/
+void AIslandPerson::TakeHPDamage(ECause Cause, int32 Amount)
 {
 	HP -= Amount;
 	if (HP <= 0)
@@ -124,12 +124,12 @@ void AIslandPerson::ProcessStates()
 		{
 			if (States.Contains(EPersonState::Starving))
 			{
-				TakeDamage(ECause::Stavation, 2);
+				TakeHPDamage(ECause::Stavation, 2);
 				GameInstance->AddNotification("%FIRSTNAME% is starving!", this, ENotificationType::Warning);
 			}
 			else if (States.Contains(EPersonState::Hungry))
 			{
-				TakeDamage(ECause::Stavation, 1);
+				TakeHPDamage(ECause::Stavation, 1);
 				States.Remove(EPersonState::Hungry);
 				States.Add(EPersonState::Starving);
 				GameInstance->AddNotification("%FIRSTNAME% is now starving", this, ENotificationType::Warning);

@@ -113,6 +113,9 @@ public:
 	//~~ DATA ~~//
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Data")
+	UDataTable* DATA_Stations;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Data")
 	UDataTable* DATA_Items;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Data")

@@ -19,6 +19,12 @@ UIslandGameInstance::UIslandGameInstance(const FObjectInitializer &ObjectInitial
 /******************** ReadTables *************************/
 void UIslandGameInstance::ReadTables()
 {
+	//~~ Stations ~~//
+	UDataTable* StationTable = (UDataTable*)StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("DataTable'/Game/Island/Util/Structs/DATA_Stations.DATA_Stations'"));
+	if (StationTable)
+	{
+		DATA_Stations = StationTable;
+	}
 	//~~ Items ~~//
 	UDataTable* ItemTable = (UDataTable*)StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("DataTable'/Game/Island/Util/Structs/DATA_Items.DATA_Items'"));
 	if (ItemTable)
@@ -115,7 +121,7 @@ void UIslandGameInstance::ParseAction(ETarget TargetType, AIslandPerson* Person,
 			break;
 		case EAction::TakeDamage:
 		{
-			if (Person) Person->TakeDamage(Cause, Amount);
+			if (Person) Person->TakeHPDamage(Cause, Amount);
 			break;
 		}
 		case EAction::BreakStation:
