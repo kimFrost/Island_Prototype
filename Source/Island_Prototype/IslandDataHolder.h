@@ -291,9 +291,11 @@ struct FST_Task
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Task(FString Title = "", float WorkTime = 0.f, TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>())
+	FST_Task(FString Title = "", float WorkTime = 0.f, bool bIsCancelable = true, bool bIsCacheable = false, TArray<FST_Outcome> Outcomes = TArray<FST_Outcome>(), TArray<FST_Influence> Influences = TArray<FST_Influence>())
 		: Title(Title)
 		, WorkTime(WorkTime)
+		, bIsCancelable(bIsCancelable)
+		, bIsCacheable(bIsCacheable)
 		, Outcomes(Outcomes)
 		, Influences(Influences)
 	{}
@@ -301,6 +303,10 @@ public:
 	FString Title;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
 	float WorkTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	bool bIsCancelable;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	bool bIsCacheable;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
 	TArray<FST_Outcome> Outcomes;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
