@@ -41,6 +41,8 @@ public:
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
 	//FST_Task& TaskWorkingOn = FST_Task();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	bool bIsWorking;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
 	TArray<EPersonState> States;

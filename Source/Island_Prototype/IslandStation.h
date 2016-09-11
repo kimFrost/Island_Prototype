@@ -51,6 +51,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Task")
 	void CompleteTask();
 
+	UFUNCTION(BlueprintCallable, Category = "Task")
+	void ResetTask();
+	
+
 	//void CompleteTask();
 
 	//void CancelTask(); 

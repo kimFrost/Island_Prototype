@@ -75,10 +75,19 @@ FST_Task AIslandStation::GetTask()
 /******************** WorkTask *************************/
 float AIslandStation::WorkTask(AIslandPerson* Person, float AmountTime)
 {
-	CurrentTask.Progress += AmountTime / CurrentTask.WorkTime;
-	if (CurrentTask.Progress >= 1)
+	if (CurrentTask.Progress < 1)
 	{
-		CompleteTask();
+		Person->bIsWorking = true;
+		CurrentTask.Progress += AmountTime / CurrentTask.WorkTime;
+		if (CurrentTask.Progress >= 1)
+		{
+			CompleteTask();
+		}
+	}
+	else
+	{
+		Person->bIsWorking = false;
+		// Task is already completed.
 	}
 	return CurrentTask.Progress;
 }
@@ -97,9 +106,14 @@ void AIslandStation::CompleteTask()
 	}
 
 	// Get new copy of base task
-	CurrentTask = StationRowData.Task;
+	//ResetTask() wait for modal choice to reset task
 }
 
+/******************** ResetTask *************************/
+void AIslandStation::ResetTask()
+{
+	CurrentTask = StationRowData.Task;
+}
 
 // Called when the game starts or when spawned
 void AIslandStation::BeginPlay()

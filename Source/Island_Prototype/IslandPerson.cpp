@@ -20,6 +20,8 @@ AIslandPerson::AIslandPerson()
 
 	//TaskWorkingOn = FST_Task();
 
+	bIsWorking = false;
+
 	UselessIndex = 0;
 
 	MaxHP = 3;
