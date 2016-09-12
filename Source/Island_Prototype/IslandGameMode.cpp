@@ -2,6 +2,7 @@
 
 #include "Island_Prototype.h"
 #include "IslandGameMode.h"
+#include "Kismet/GameplayStatics.h"
 #include "IslandPlayerControllerBase.h"
 
 // Sets default values
@@ -20,6 +21,8 @@ AIslandGameMode::AIslandGameMode(const FObjectInitializer &ObjectInitializer) : 
 void AIslandGameMode::SetTimeRate(float Rate)
 {
 	TimeSpeed = Rate;
+	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), Rate);
+	CustomTimeDilation = Rate;
 }
 
 
