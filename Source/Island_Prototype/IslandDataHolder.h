@@ -13,6 +13,31 @@ class AIslandPerson;
 //~~~~~ ENUMS ~~~~~//
 
 UENUM(BlueprintType)
+enum class EPhysicalStrain : uint8
+{
+	Relaxing UMETA(DisplayName = "Relaxing"),
+	Hard UMETA(DisplayName = "Hard"),
+	Extreme UMETA(DisplayName = "Extreme")
+};
+
+// Make DATA Table of enum values instead 
+UENUM(BlueprintType)
+enum class EPhysicalStrainValue : uint8
+{
+	Relaxing UMETA(DisplayName = "0"),
+	Hard UMETA(DisplayName = "2"),
+	Extreme UMETA(DisplayName = "4")
+};
+
+UENUM(BlueprintType)
+enum class EMentalStrain : uint8
+{
+	Relaxing UMETA(DisplayName = "Relaxing"),
+	Hard UMETA(DisplayName = "Hard"),
+	Extreme UMETA(DisplayName = "Extreme")
+};
+
+UENUM(BlueprintType)
 enum class EUsefulRating : uint8
 {
 	UtterlyUseless UMETA(DisplayName = "Utterly useless"),
@@ -22,7 +47,6 @@ enum class EUsefulRating : uint8
 	VeryUseful UMETA(DisplayName = "Very useful")
 };
 
-
 UENUM(BlueprintType)
 enum class ETaskType : uint8
 {
@@ -30,13 +54,11 @@ enum class ETaskType : uint8
 	Work UMETA(DisplayName = "Work")
 };
 
-
 UENUM(BlueprintType)
 enum class ENotificationType : uint8
 {
 	Warning UMETA(DisplayName = "Warning")
 };
-
 
 UENUM(BlueprintType)
 enum class ETileActions : uint8
@@ -320,6 +342,21 @@ public:
 };
 
 //~~~~~ DATA IMPORT ~~~~~//
+
+USTRUCT(BlueprintType)
+struct FST_EnumValue : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_EnumValue(enum Enum, float Value = 0.f)
+		: Enum(Enum)
+		, Value(Value)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	enum Enum;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value;
+};
 
 USTRUCT(BlueprintType)
 struct FST_DoomEvent : public FTableRowBase
