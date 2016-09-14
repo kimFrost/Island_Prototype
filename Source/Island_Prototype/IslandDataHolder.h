@@ -343,17 +343,21 @@ public:
 
 //~~~~~ DATA IMPORT ~~~~~//
 
+
+
+
+
 USTRUCT(BlueprintType)
 struct FST_EnumValue : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_EnumValue(enum Enum, float Value = 0.f)
+	FST_EnumValue(FString Enum = "", float Value = 0.f)
 		: Enum(Enum)
 		, Value(Value)
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	enum Enum;
+	FString Enum;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float Value;
 };
