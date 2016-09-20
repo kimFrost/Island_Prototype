@@ -21,6 +21,7 @@ AIslandPerson::AIslandPerson()
 	//TaskWorkingOn = FST_Task();
 
 	bIsWorking = false;
+	CurrentState = EPersonState::Waiting;
 
 	UselessIndex = 0;
 
@@ -51,6 +52,19 @@ AIslandPerson::AIslandPerson()
 		MoveCurve = CurveObj.Object;
 		MoveTimeLine.AddInterpFloat(MoveCurve, MoveTimeFloatDelegate, FName("Percentage_Complete"));
 	}
+
+
+	//~~ Bars ~~//
+
+	FST_BarSegment StressSegment1 = FST_BarSegment(0.f, 5.f);
+	Stress.Segments.Add(StressSegment1);
+	FST_BarSegment StressSegment2 = FST_BarSegment(5.f, 10.f);
+	Stress.Segments.Add(StressSegment2);
+
+	FST_BarSegment EntertainmentSegment1 = FST_BarSegment(0.f, 5.f);
+	Entertainment.Segments.Add(EntertainmentSegment1);
+	FST_BarSegment EntertainmentSegment2 = FST_BarSegment(5.f, 10.f);
+	Entertainment.Segments.Add(EntertainmentSegment2);
 }
 
 
@@ -110,14 +124,14 @@ void AIslandPerson::ProcessStates()
 	{
 		if (bEatenThisTurn)
 		{
-			if (States.Contains(EPersonState::Starving))
+			if (States.Contains(EPersonStateOld::Starving))
 			{
-				States.Remove(EPersonState::Starving);
-				States.Add(EPersonState::Hungry);
+				States.Remove(EPersonStateOld::Starving);
+				States.Add(EPersonStateOld::Hungry);
 			}
-			else if (States.Contains(EPersonState::Hungry))
+			else if (States.Contains(EPersonStateOld::Hungry))
 			{
-				States.Remove(EPersonState::Hungry);
+				States.Remove(EPersonStateOld::Hungry);
 			}
 			else
 			{
@@ -126,21 +140,21 @@ void AIslandPerson::ProcessStates()
 		}
 		else
 		{
-			if (States.Contains(EPersonState::Starving))
+			if (States.Contains(EPersonStateOld::Starving))
 			{
 				TakeHPDamage(ECause::Stavation, 2);
 				GameInstance->AddNotification("%FIRSTNAME% is starving!", this, ENotificationType::Warning);
 			}
-			else if (States.Contains(EPersonState::Hungry))
+			else if (States.Contains(EPersonStateOld::Hungry))
 			{
 				TakeHPDamage(ECause::Stavation, 1);
-				States.Remove(EPersonState::Hungry);
-				States.Add(EPersonState::Starving);
+				States.Remove(EPersonStateOld::Hungry);
+				States.Add(EPersonStateOld::Starving);
 				GameInstance->AddNotification("%FIRSTNAME% is now starving", this, ENotificationType::Warning);
 			}
 			else
 			{
-				States.Add(EPersonState::Hungry);
+				States.Add(EPersonStateOld::Hungry);
 				GameInstance->AddNotification("%FIRSTNAME% is hungry", this, ENotificationType::Warning);
 			}
 			if (HP <= 0)

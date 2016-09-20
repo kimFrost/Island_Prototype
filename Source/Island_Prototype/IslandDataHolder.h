@@ -73,6 +73,15 @@ enum class ETileActions : uint8
 UENUM(BlueprintType)
 enum class EPersonState : uint8
 {
+	Working UMETA(DisplayName = "Working"),
+	Waiting UMETA(DisplayName = "Waiting"),
+	Resting UMETA(DisplayName = "Resting"),
+	Sleeping UMETA(DisplayName = "Sleeping"),
+};
+
+UENUM(BlueprintType)
+enum class EPersonStateOld : uint8
+{
 	Hungry UMETA(DisplayName = "Hungry"),
 	Starving UMETA(DisplayName = "Starving"),
 	Sad UMETA(DisplayName = "Sad"),
@@ -85,6 +94,7 @@ enum class EPersonState : uint8
 	Thirsty UMETA(DisplayName = "Thirsty"),
 	Dehydrated UMETA(DisplayName = "Dehydrated")
 };
+
 
 // Maybe use levels instead? Hungry lv 1-3 -> Starving lv 1-3
 
@@ -344,9 +354,6 @@ public:
 //~~~~~ DATA IMPORT ~~~~~//
 
 
-
-
-
 USTRUCT(BlueprintType)
 struct FST_EnumValue : public FTableRowBase
 {
@@ -361,6 +368,41 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float Value;
 };
+
+
+
+USTRUCT(BlueprintType)
+struct FST_BarSegment : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_BarSegment(float Min = 0.f, float Max = 10.f)
+		: Min(Min)
+		, Max(Max)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Max;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Min;
+};
+
+
+USTRUCT(BlueprintType)
+struct FST_Bar : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+public:
+	FST_Bar(FString Title = "", TArray<FST_BarSegment> Segments = TArray<FST_BarSegment>())
+		: Title(Title)
+		, Segments(Segments)
+	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString Title;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	TArray<FST_BarSegment> Segments;
+};
+
+
 
 USTRUCT(BlueprintType)
 struct FST_DoomEvent : public FTableRowBase

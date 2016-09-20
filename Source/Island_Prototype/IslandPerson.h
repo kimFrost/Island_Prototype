@@ -39,13 +39,24 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	TArray<FST_Task> TaskCache;
 
+	//~~ Bars ~~//
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	FST_Bar Stress;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	FST_Bar Entertainment;
+
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
 	//FST_Task& TaskWorkingOn = FST_Task();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
 	bool bIsWorking;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
-	TArray<EPersonState> States;
+	EPersonState CurrentState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
+	TArray<EPersonStateOld> States;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
 	TArray<FST_Item> Backpack;
