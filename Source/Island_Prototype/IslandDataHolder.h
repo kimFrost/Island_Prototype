@@ -376,10 +376,13 @@ struct FST_BarSegment : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_BarSegment(float Min = 0.f, float Max = 10.f)
-		: Min(Min)
+	FST_BarSegment(FString Title = "", float Min = 0.f, float Max = 10.f)
+		: Title(Title)
+		, Min(Min)
 		, Max(Max)
 	{}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString Title;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float Max;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
@@ -392,14 +395,17 @@ struct FST_Bar : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 public:
-	FST_Bar(FString Title = "", TArray<FST_BarSegment> Segments = TArray<FST_BarSegment>())
+	FST_Bar(FString Title = "", TArray<FST_BarSegment> Segments = TArray<FST_BarSegment>(), float Value = 0.f)
 		: Title(Title)
 		, Segments(Segments)
+		, Value(Value)
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString Title;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	TArray<FST_BarSegment> Segments;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value;
 };
 
 

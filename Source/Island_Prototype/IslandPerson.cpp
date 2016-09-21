@@ -56,14 +56,16 @@ AIslandPerson::AIslandPerson()
 
 	//~~ Bars ~~//
 
-	FST_BarSegment StressSegment1 = FST_BarSegment(0.f, 5.f);
+	Stress.Title = "Stress";
+	FST_BarSegment StressSegment1 = FST_BarSegment("Relaxed" ,0.f, 5.f);
 	Stress.Segments.Add(StressSegment1);
-	FST_BarSegment StressSegment2 = FST_BarSegment(5.f, 10.f);
+	FST_BarSegment StressSegment2 = FST_BarSegment("Stressed", 5.f, 10.f);
 	Stress.Segments.Add(StressSegment2);
 
-	FST_BarSegment EntertainmentSegment1 = FST_BarSegment(0.f, 5.f);
+	Entertainment.Title = "Entertainment";
+	FST_BarSegment EntertainmentSegment1 = FST_BarSegment("Bored", 0.f, 5.f);
 	Entertainment.Segments.Add(EntertainmentSegment1);
-	FST_BarSegment EntertainmentSegment2 = FST_BarSegment(5.f, 10.f);
+	FST_BarSegment EntertainmentSegment2 = FST_BarSegment("Amused", 5.f, 10.f);
 	Entertainment.Segments.Add(EntertainmentSegment2);
 }
 
