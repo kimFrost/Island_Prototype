@@ -63,9 +63,9 @@ AIslandPerson::AIslandPerson()
 	Stress.Segments.Add(StressSegment2);
 
 	Entertainment.Title = "Entertainment";
-	FST_BarSegment EntertainmentSegment1 = FST_BarSegment("Bored", 0.f, 5.f);
+	FST_BarSegment EntertainmentSegment1 = FST_BarSegment("Bored", 0.f, 4.f);
 	Entertainment.Segments.Add(EntertainmentSegment1);
-	FST_BarSegment EntertainmentSegment2 = FST_BarSegment("Amused", 5.f, 10.f);
+	FST_BarSegment EntertainmentSegment2 = FST_BarSegment("Amused", 4.f, 10.f);
 	Entertainment.Segments.Add(EntertainmentSegment2);
 }
 
