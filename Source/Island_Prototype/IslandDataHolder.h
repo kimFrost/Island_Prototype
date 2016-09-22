@@ -95,6 +95,12 @@ enum class EPersonStateOld : uint8
 	Dehydrated UMETA(DisplayName = "Dehydrated")
 };
 
+UENUM(BlueprintType)
+enum class EPersonBar : uint8
+{
+	Stress UMETA(DisplayName = "Stress"),
+	Entertainment UMETA(DisplayName = "Entertainment")
+};
 
 // Maybe use levels instead? Hungry lv 1-3 -> Starving lv 1-3
 

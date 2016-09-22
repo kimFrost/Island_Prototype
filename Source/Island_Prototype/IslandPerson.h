@@ -88,6 +88,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Person")
 	void ProcessStates();
 
+	UFUNCTION(BlueprintCallable, Category = "Person")
+	void AlterBar(EPersonBar Bar, float Value);
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
