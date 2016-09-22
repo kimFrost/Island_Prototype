@@ -4,6 +4,7 @@
 
 #include "GameFramework/Character.h"
 #include "IslandDataHolder.h"
+#include "Bar/Bar.h"
 #include "IslandPerson.generated.h"
 
 
@@ -46,6 +47,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
 	FST_Bar Entertainment;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	UBar* FindThisBar;
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
 	//FST_Task& TaskWorkingOn = FST_Task();

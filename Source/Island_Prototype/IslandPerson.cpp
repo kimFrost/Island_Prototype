@@ -69,6 +69,13 @@ AIslandPerson::AIslandPerson()
 	Entertainment.Segments.Add(EntertainmentSegment1);
 	FST_BarSegment EntertainmentSegment2 = FST_BarSegment("Amused", 4.f, 10.f);
 	Entertainment.Segments.Add(EntertainmentSegment2);
+
+	// Spawn UBar Object and store reference
+	FindThisBar = CreateDefaultSubobject<UBar>(TEXT("FindThisBar"));
+	if (FindThisBar)
+	{
+		FindThisBar->BarValue = "Value has been set";
+	}
 }
 
 
