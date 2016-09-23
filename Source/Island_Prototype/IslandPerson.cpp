@@ -10,7 +10,7 @@
 
 
 // Sets default values
-AIslandPerson::AIslandPerson()
+AIslandPerson::AIslandPerson(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -56,6 +56,7 @@ AIslandPerson::AIslandPerson()
 
 	//~~ Bars ~~//
 
+	/*
 	Stress.Title = "Stress";
 	Stress.Value = 5.f;
 	FST_BarSegment StressSegment1 = FST_BarSegment("Relaxed" ,0.f, 5.f);
@@ -69,13 +70,31 @@ AIslandPerson::AIslandPerson()
 	Entertainment.Segments.Add(EntertainmentSegment1);
 	FST_BarSegment EntertainmentSegment2 = FST_BarSegment("Amused", 4.f, 10.f);
 	Entertainment.Segments.Add(EntertainmentSegment2);
+	*/
 
 	// Spawn UBar Object and store reference
-	FindThisBar = CreateDefaultSubobject<UBar>(TEXT("FindThisBar"));
+	
+	//FindThisBar = CreateDefaultSubobject<UBar>(TEXT("FindThisBar"));
+	//FindThisBar = ConstructObject<UBar>(UBar::StaticClass()); // DEPRECATED
+	//FindThisBar = NewObject<UBar>(this, UBar::StaticClass());
+
+	//FindThisBar = NewObject<UBar>(this);
+	//FindThisBar = NewNamedObject<UBar>(this, TEXT("FindThisBar"), EObjectFlags::RF_MarkAsRootSet);
+	//FindThisBar = NewNamedObject<UBar>(this, TEXT("FindThisBar"));
+	//FindThisBar = CreateDefaultSubobject<UBar>(TEXT("FindThisBar"));
+
+	/*
+	FindThisBar = ObjectInitializer.CreateDefaultSubobject<UBar>(this, TEXT("FindThisBar"));
 	if (FindThisBar)
 	{
-		FindThisBar->BarValue = "Value has been set";
+		//FindThisBar->AddToRoot(); // Crashes
+		FindThisBar->Value = 4.f;
+		FindThisBar->Percent = 0.4f;
 	}
+	*/
+
+	//NewObject with empty name can't be used to create default subobjects (inside of UObject derived class constructor) as it produces inconsistent object names. 
+	// Use ObjectInitializer.CreateDefaultSuobject<> instead.
 }
 
 
@@ -184,12 +203,12 @@ void AIslandPerson::AlterBar(EPersonBar Bar, float Value)
 	{
 		case EPersonBar::Entertainment:
 		{
-			Entertainment.Value += Value;
+			if (Entertainment) Entertainment->Data.Value += Value;
 			break;
 		}
 		case EPersonBar::Stress:
 		{
-			Stress.Value += Value;
+			if (Stress) Stress->Data.Value += Value;
 			break;
 		}
 	}
@@ -547,6 +566,16 @@ void AIslandPerson::BeginPlay()
 		//GameInstance->OnNewTurn.AddDynamic(this, &AIslandPerson::OnNewTurn);
 	}
 
+	/*
+	FindThisBar = NewObject<UBar>();
+	if (FindThisBar)
+	{
+		//FindThisBar->AddToRoot();
+		FindThisBar->Value = 4.f;
+		FindThisBar->Percent = 0.4f;
+	}
+	*/
+
 	//~~ Timer used to prevent check being made before beginplay bidings is done on tile ~~//
 	//FTimerHandle FuzeTimerHandle;
 	//GetWorld()->GetTimerManager().SetTimer(FuzeTimerHandle, this, &AIslandPerson::TimerExpired, 1.f);
@@ -605,5 +634,49 @@ void AIslandPerson::SetupPlayerInputComponent(class UInputComponent* InputCompon
 {
 	Super::SetupPlayerInputComponent(InputComponent);
 
+}
+
+void AIslandPerson::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	UE_LOG(LogTemp, Warning, TEXT("Person::OnConstruction"));
+
+	/*
+	Stress.Title = "Stress";
+	Stress.Value = 5.f;
+	FST_BarSegment StressSegment1 = FST_BarSegment("Relaxed", 0.f, 5.f);
+	Stress.Segments.Add(StressSegment1);
+	FST_BarSegment StressSegment2 = FST_BarSegment("Stressed", 5.f, 10.f);
+	Stress.Segments.Add(StressSegment2);
+
+	Entertainment.Title = "Entertainment";
+	Entertainment.Value = 2.f;
+	FST_BarSegment EntertainmentSegment1 = FST_BarSegment("Bored", 0.f, 4.f);
+	Entertainment.Segments.Add(EntertainmentSegment1);
+	FST_BarSegment EntertainmentSegment2 = FST_BarSegment("Amused", 4.f, 10.f);
+	Entertainment.Segments.Add(EntertainmentSegment2);
+	*/
+
+	Stress = NewObject<UBar>();
+	if (Stress)
+	{
+		Stress->Data.Title = "Stress";
+		Stress->Data.Value = 5.f;
+		FST_BarSegment StressSegment1 = FST_BarSegment("Relaxed", 0.f, 5.f);
+		Stress->Data.Segments.Add(StressSegment1);
+		FST_BarSegment StressSegment2 = FST_BarSegment("Stressed", 5.f, 10.f);
+		Stress->Data.Segments.Add(StressSegment2);
+	}
+	Entertainment = NewObject<UBar>();
+	if (Entertainment)
+	{
+		Entertainment->Data.Title = "Entertainment";
+		Entertainment->Data.Value = 2.f;
+		FST_BarSegment EntertainmentSegment1 = FST_BarSegment("Bored", 0.f, 4.f);
+		Entertainment->Data.Segments.Add(EntertainmentSegment1);
+		FST_BarSegment EntertainmentSegment2 = FST_BarSegment("Amused", 4.f, 10.f);
+		Entertainment->Data.Segments.Add(EntertainmentSegment2);
+	}
 }
 

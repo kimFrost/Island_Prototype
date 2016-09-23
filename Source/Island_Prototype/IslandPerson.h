@@ -22,7 +22,7 @@ class ISLAND_PROTOTYPE_API AIslandPerson : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	AIslandPerson();
+	AIslandPerson(const FObjectInitializer &ObjectInitializer);
 
 	//~~ DATA ~~//
 
@@ -42,14 +42,18 @@ public:
 
 	//~~ Bars ~~//
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
-	FST_Bar Stress;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	//FST_Bar Stress;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
-	FST_Bar Entertainment;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
+	//FST_Bar Entertainment;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
-	UBar* FindThisBar;
+	UPROPERTY(Instanced, EditAnywhere, BlueprintReadWrite, Category = "Task")
+	UBar* Stress;
+
+	UPROPERTY(Instanced, EditAnywhere, BlueprintReadWrite, Category = "Task")
+	UBar* Entertainment;
+
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
 	//FST_Task& TaskWorkingOn = FST_Task();
@@ -163,6 +167,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	virtual void OnConstruction(const FTransform& Transform) override;
 	
 	
 };

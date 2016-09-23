@@ -3,13 +3,17 @@
 #pragma once
 
 #include "Object.h"
+#include "IslandDataHolder.h"
 #include "Bar.generated.h"
 
 /**
  * 
  */
 
-UCLASS()
+//Blueprintable
+//BlueprintType
+
+UCLASS(Blueprintable, BlueprintType)
 class ISLAND_PROTOTYPE_API UBar : public UObject
 {
 	GENERATED_BODY()
@@ -19,5 +23,25 @@ public:
 	~UBar();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString BarValue;
+	FST_Bar Data;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Percent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Min;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Max;
+
+	UFUNCTION(BlueprintCallable, Category = "Data")
+	void AddValue(float _Value);
+
+	UFUNCTION(BlueprintCallable, Category = "Data")
+	void UpdatePercent();
+
+
 };
