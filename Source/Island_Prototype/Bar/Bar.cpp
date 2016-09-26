@@ -30,5 +30,18 @@ void UBar::AddValue(float _Value)
 void UBar::UpdatePercent()
 {
 	Percent = Value / 10;
+	// Set state
+	for(FST_BarSegment& Segment : Data.Segments)
+	{
+		if (Segment.Min < Value && Segment.Max < Value)
+		{
+			SetState(Segment);
+			break;
+		}
+	}
 }
 
+void UBar::SetState(FST_BarSegment& Segment)
+{
+	CurrentState = Segment;
+}

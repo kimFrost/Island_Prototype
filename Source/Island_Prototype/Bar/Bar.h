@@ -29,6 +29,9 @@ public:
 	float Value;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FST_BarSegment CurrentState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float Percent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
@@ -42,6 +45,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Data")
 	void UpdatePercent();
+
+	UFUNCTION(BlueprintCallable, Category = "Data")
+	void SetState(FST_BarSegment& Segment);
 
 
 };
