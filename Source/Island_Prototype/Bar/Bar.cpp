@@ -10,6 +10,7 @@ UBar::UBar()
 	Max = 10.f;
 	Value = 0.f;
 	Percent = 0.f;
+
 }
 
 UBar::~UBar()
@@ -33,7 +34,12 @@ void UBar::UpdatePercent()
 	// Set state
 	for(FST_BarSegment& Segment : Data.Segments)
 	{
-		if (Segment.Min < Value && Segment.Max < Value)
+		if (Value >= Segment.Min && Value < Segment.Max)
+		{
+			SetState(Segment);
+			break;
+		}
+		else if (Value == 10.f && Segment.Max == 10.f)
 		{
 			SetState(Segment);
 			break;
@@ -45,3 +51,4 @@ void UBar::SetState(FST_BarSegment& Segment)
 {
 	CurrentState = Segment;
 }
+

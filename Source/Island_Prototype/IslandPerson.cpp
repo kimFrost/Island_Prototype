@@ -2,6 +2,7 @@
 
 #include "Island_Prototype.h"
 #include "IslandGameInstance.h"
+#include "IslandGameMode.h"
 #include "IslandDataHolder.h"
 #include "IslandPlayerControllerBase.h"
 #include "IslandTile.h"
@@ -203,12 +204,12 @@ void AIslandPerson::AlterBar(EPersonBar Bar, float Value)
 	{
 		case EPersonBar::Entertainment:
 		{
-			if (Entertainment) Entertainment->Data.Value += Value;
+			if (Entertainment) Entertainment->AddValue(Value);
 			break;
 		}
 		case EPersonBar::Stress:
 		{
-			if (Stress) Stress->Data.Value += Value;
+			if (Stress) Stress->AddValue(Value);
 			break;
 		}
 	}
@@ -566,6 +567,14 @@ void AIslandPerson::BeginPlay()
 		//GameInstance->OnNewTurn.AddDynamic(this, &AIslandPerson::OnNewTurn);
 	}
 
+	AIslandGameMode* GameMode = Cast<AIslandGameMode>(GetWorld()->GetAuthGameMode());
+	//AIslandGameMode* GameMode = (AIslandGameMode*)GetWorld()->GetAuthGameMode();
+	if (GameMode)
+	{
+		
+
+	}
+
 	/*
 	FindThisBar = NewObject<UBar>();
 	if (FindThisBar)
@@ -667,6 +676,7 @@ void AIslandPerson::OnConstruction(const FTransform& Transform)
 		Stress->Data.Segments.Add(StressSegment1);
 		FST_BarSegment StressSegment2 = FST_BarSegment("Stressed", 5.f, 10.f);
 		Stress->Data.Segments.Add(StressSegment2);
+		Stress->UpdatePercent();
 	}
 	Entertainment = NewObject<UBar>();
 	if (Entertainment)
@@ -677,6 +687,7 @@ void AIslandPerson::OnConstruction(const FTransform& Transform)
 		Entertainment->Data.Segments.Add(EntertainmentSegment1);
 		FST_BarSegment EntertainmentSegment2 = FST_BarSegment("Amused", 4.f, 10.f);
 		Entertainment->Data.Segments.Add(EntertainmentSegment2);
+		Entertainment->UpdatePercent();
 	}
 }
 

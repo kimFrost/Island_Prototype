@@ -8,6 +8,10 @@
 #include "IslandGameMode.generated.h"
 
 
+//~~~~~ Delegates/Event dispatcher ~~~~~//
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTimeUpdated, float, Time, float, TimeProgressed);
+
+
 
 /**
  * 
@@ -41,6 +45,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Time")
 	void SetTimeRate(float Rate);
 
+	//~~ TIME - delegates ~~//
+
+	UPROPERTY(BlueprintAssignable, Category = "Input")
+	FTimeUpdated OnTimeUpdated;
 
 	//~~ Overrides ~~//
 

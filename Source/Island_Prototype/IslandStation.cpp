@@ -85,6 +85,7 @@ float AIslandStation::WorkTask(AIslandPerson* Person, float AmountTime)
 	}
 	else
 	{
+		Person->CurrentState = EPersonState::Waiting;
 		Person->bIsWorking = false;
 		// Task is already completed.
 	}

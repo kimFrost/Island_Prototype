@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Island_Prototype.h"
+#include "IslandPerson.h"
 #include "IslandGameMode.h"
 #include "Kismet/GameplayStatics.h"
 #include "IslandPlayerControllerBase.h"
@@ -30,6 +31,24 @@ void AIslandGameMode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// Get every person
+	bool AnyNotWorking = false;
+	for (TActorIterator<AIslandPerson> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		if (ActorItr)
+		{
+			if (ActorItr->CurrentState != EPersonState::Working)
+			{
+				// If not unasigned to station
+				AnyNotWorking = true;
+			}
+		}
+		if (!AnyNotWorking)
+		{
+			TimeOfDay = TimeSpeed * DeltaTime + TimeOfDay;
+			OnTimeUpdated.Broadcast(TimeOfDay, DeltaTime);
+		}
+	}
 }
 
 

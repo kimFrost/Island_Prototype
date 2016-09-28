@@ -75,8 +75,10 @@ enum class EPersonState : uint8
 {
 	Working UMETA(DisplayName = "Working"),
 	Waiting UMETA(DisplayName = "Waiting"),
-	Resting UMETA(DisplayName = "Resting"),
-	Sleeping UMETA(DisplayName = "Sleeping"),
+	//Resting UMETA(DisplayName = "Resting"),
+	//Sleeping UMETA(DisplayName = "Sleeping"),
+	Moving UMETA(DisplayName = "Moving"),
+	FailedMoving UMETA(DisplayName = "FailedMoving"),
 };
 
 UENUM(BlueprintType)
