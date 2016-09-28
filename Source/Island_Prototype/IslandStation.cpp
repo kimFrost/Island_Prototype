@@ -13,6 +13,11 @@ AIslandStation::AIslandStation(const FObjectInitializer &ObjectInitializer) : Su
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	//~~ Root component ~~//
+	USceneComponent* const TranslationComp = CreateDefaultSubobject<USceneComponent>(TEXT("StationScene"));
+	TranslationComp->Mobility = EComponentMobility::Movable;
+	RootComponent = TranslationComp;
+
 }
 
 
@@ -80,12 +85,13 @@ float AIslandStation::WorkTask(AIslandPerson* Person, float AmountTime)
 		CurrentTask.Progress += AmountTime / CurrentTask.WorkTime;
 		if (CurrentTask.Progress >= 1)
 		{
+			
 			CompleteTask();
 		}
 	}
 	else
 	{
-		Person->CurrentState = EPersonState::Waiting;
+		Person->CurrentState = EPersonState::Awaiting;
 		Person->bIsWorking = false;
 		// Task is already completed.
 	}
@@ -98,6 +104,14 @@ void AIslandStation::CompleteTask()
 	UIslandGameInstance* GameInstance = Cast<UIslandGameInstance>(GetGameInstance());
 	if (GameInstance)
 	{
+		for (auto& Person : PeopleStationed)
+		{
+			if (Person)
+			{
+				Person->CurrentState = EPersonState::Awaiting;
+			}
+		}
+
 		GameInstance->OnTaskCompleted.Broadcast(CurrentTask, this);
 
 		FST_Outcome Outcome = GameInstance->GetOutcome(CurrentTask, PeopleStationed, TArray<FST_Modifier>());

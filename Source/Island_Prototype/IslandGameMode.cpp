@@ -31,23 +31,24 @@ void AIslandGameMode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Get every person
-	bool AnyNotWorking = false;
+	GEngine->AddOnScreenDebugMessage(-1, 0.f, FColor::Green, TEXT("Time: ") + FString::SanitizeFloat(TimeOfDay));
+
+	// Get every person and check if they are working
+	bool bIsAllWorking = true;
 	for (TActorIterator<AIslandPerson> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 	{
 		if (ActorItr)
 		{
 			if (ActorItr->CurrentState != EPersonState::Working)
 			{
-				// If not unasigned to station
-				AnyNotWorking = true;
+				bIsAllWorking = false;
 			}
 		}
-		if (!AnyNotWorking)
-		{
-			TimeOfDay = TimeSpeed * DeltaTime + TimeOfDay;
-			OnTimeUpdated.Broadcast(TimeOfDay, DeltaTime);
-		}
+	}
+	if (bIsAllWorking)
+	{
+		TimeOfDay = TimeSpeed * DeltaTime + TimeOfDay;
+		OnTimeUpdated.Broadcast(TimeOfDay, DeltaTime);
 	}
 }
 

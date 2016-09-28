@@ -73,12 +73,12 @@ enum class ETileActions : uint8
 UENUM(BlueprintType)
 enum class EPersonState : uint8
 {
+	Awaiting UMETA(DisplayName = "Awaiting"),
+	Idle UMETA(DisplayName = "Idle"),
 	Working UMETA(DisplayName = "Working"),
-	Waiting UMETA(DisplayName = "Waiting"),
 	//Resting UMETA(DisplayName = "Resting"),
 	//Sleeping UMETA(DisplayName = "Sleeping"),
 	Moving UMETA(DisplayName = "Moving"),
-	FailedMoving UMETA(DisplayName = "FailedMoving"),
 };
 
 UENUM(BlueprintType)

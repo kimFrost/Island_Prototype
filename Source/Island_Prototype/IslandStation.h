@@ -23,7 +23,7 @@ public:
 	FST_Station StationRowData;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
-	FString RowId;
+	FString RowId; 
 
 	//TMap<AIslandPerson*, FST_Task> WorkingTasks;
 	//TMap<FST_Task, TArray<AIslandPerson*>> WorkingTasks;

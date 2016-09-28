@@ -22,7 +22,7 @@ AIslandPerson::AIslandPerson(const FObjectInitializer &ObjectInitializer) : Supe
 	//TaskWorkingOn = FST_Task();
 
 	bIsWorking = false;
-	CurrentState = EPersonState::Waiting;
+	CurrentState = EPersonState::Awaiting;
 
 	UselessIndex = 0;
 
