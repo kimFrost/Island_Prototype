@@ -37,7 +37,7 @@ void AIslandStation::LoadStationData()
 }
 
 /******************** GetTask *************************/
-FST_Task AIslandStation::GetTask()
+UTask* AIslandStation::GetTask()
 {
 	return CurrentTask;
 
@@ -80,7 +80,7 @@ FST_Task AIslandStation::GetTask()
 /******************** WorkTask *************************/
 float AIslandStation::WorkTask(AIslandPerson* Person, float AmountTime)
 {
-	if (CurrentTask.Progress < 1)
+	if (CurrentTask && CurrentTask.Progress < 1)
 	{
 		CurrentTask.Progress += AmountTime / CurrentTask.WorkTime;
 		if (CurrentTask.Progress >= 1)

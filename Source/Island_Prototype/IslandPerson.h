@@ -32,27 +32,25 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString LastName;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	//~~ Bars ~~//
+
+	UPROPERTY(Instanced, EditAnywhere, BlueprintReadWrite, Category = "Data")
+	UBar* Stress;
+
+	UPROPERTY(Instanced, EditAnywhere, BlueprintReadWrite, Category = "Data")
+	UBar* Entertainment;
+
+	//~~ Task ~~//
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
 	TArray<FST_TaskDone> TasksDoneThisTurn;
 
 	// Task cache for personal tasks, that cannot be shared with other. Etc excerise, improving self. 
 	//TMap<FString, float> TaskCache;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
 	TArray<FST_Task> TaskCache;
 
-	//~~ Bars ~~//
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
-	//FST_Bar Stress;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Task")
-	//FST_Bar Entertainment;
-
-	UPROPERTY(Instanced, EditAnywhere, BlueprintReadWrite, Category = "Task")
-	UBar* Stress;
-
-	UPROPERTY(Instanced, EditAnywhere, BlueprintReadWrite, Category = "Task")
-	UBar* Entertainment;
 
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Person")
