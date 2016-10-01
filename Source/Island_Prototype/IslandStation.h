@@ -5,7 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "IslandDataHolder.h"
 #include "IslandPerson.h"
-#include "Task.h"
+#include "Task/Task.h"
 #include "IslandStation.generated.h"
 
 UCLASS()
@@ -37,7 +37,7 @@ public:
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
 	//TArray<FST_Task> TaskCache;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Station")
+	UPROPERTY(Instanced, EditAnywhere, BlueprintReadWrite, Category = "Task")
 	UTask* CurrentTask;
 	//FST_Task CurrentTask;
 
@@ -50,7 +50,7 @@ public:
 	UTask* GetTask(); // Only support one task for now
 
 	UFUNCTION(BlueprintCallable, Category = "Task")
-	float WorkTask(AIslandPerson* Person, float AmountTime); //returns progress
+	float WorkStation(AIslandPerson* Person, float AmountTime); //returns progress
 
 	UFUNCTION(BlueprintCallable, Category = "Task")
 	void CompleteTask();

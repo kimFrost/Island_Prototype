@@ -3,6 +3,7 @@
 #include "Island_Prototype.h"
 #include "IslandDataHolder.h"
 #include "IslandPerson.h"
+#include "Task/Task.h"
 #include "IslandGameInstance.h"
 #include "IslandStation.h"
 
@@ -77,25 +78,28 @@ UTask* AIslandStation::GetTask()
 }
 
 
-/******************** WorkTask *************************/
-float AIslandStation::WorkTask(AIslandPerson* Person, float AmountTime)
+/******************** WorkStation *************************/
+float AIslandStation::WorkStation(AIslandPerson* Person, float AmountTime)
 {
-	if (CurrentTask && CurrentTask.Progress < 1)
+	float _Progress = 0.f;
+	if (!CurrentTask)
 	{
-		CurrentTask.Progress += AmountTime / CurrentTask.WorkTime;
-		if (CurrentTask.Progress >= 1)
+		ResetTask();
+	}
+	if (CurrentTask)
+	{
+		_Progress = CurrentTask->WorkTask(Person, AmountTime);
+		if (_Progress >= 1)
 		{
-			
 			CompleteTask();
 		}
+		else 
+		{ 
+			Person->CurrentState = EPersonState::Working;
+			Person->bIsWorking = true;
+		}
 	}
-	else
-	{
-		Person->CurrentState = EPersonState::Awaiting;
-		Person->bIsWorking = false;
-		// Task is already completed.
-	}
-	return CurrentTask.Progress;
+	return _Progress;
 }
 
 /******************** CompleteTask *************************/
@@ -109,12 +113,15 @@ void AIslandStation::CompleteTask()
 			if (Person)
 			{
 				Person->CurrentState = EPersonState::Awaiting;
+				Person->bIsWorking = false;
 			}
 		}
 
 		GameInstance->OnTaskCompleted.Broadcast(CurrentTask, this);
+		
+		//FST_Outcome Outcome = GameInstance->GetOutcome(CurrentTask, PeopleStationed, TArray<FST_Modifier>());
 
-		FST_Outcome Outcome = GameInstance->GetOutcome(CurrentTask, PeopleStationed, TArray<FST_Modifier>());
+		ResetTask();
 
 
 	}
@@ -125,7 +132,18 @@ void AIslandStation::CompleteTask()
 /******************** ResetTask *************************/
 void AIslandStation::ResetTask()
 {
-	CurrentTask = StationRowData.Task;
+	// Destroy task
+	if (CurrentTask)
+	{
+		//CurrentTask->ConditionalBeginDestroy(); // Do I need this, or will the garbage collector notice that no now is reference to it?
+		CurrentTask = nullptr;
+	}
+	// Make new
+	CurrentTask = NewObject<UTask>();
+	if (CurrentTask)
+	{
+		CurrentTask->Data = StationRowData.Task;
+	}
 }
 
 // Called when the game starts or when spawned
@@ -134,7 +152,7 @@ void AIslandStation::BeginPlay()
 	Super::BeginPlay();
 	
 	LoadStationData();
-	CurrentTask = StationRowData.Task;
+	ResetTask();
 }
 
 // Called every frame

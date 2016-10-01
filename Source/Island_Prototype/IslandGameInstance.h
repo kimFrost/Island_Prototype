@@ -39,6 +39,7 @@ enum class EGameState : uint8
 class AIslandTile;
 class AIslandPerson;
 class AIslandStation;
+class UTask;
 
 
 //~~~~~ Delegates/Event dispatcher ~~~~~//
@@ -53,7 +54,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemAdded, FST_Item, Item);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FIventoryUpdated);
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTaskCompleted, FST_Task, Task, AIslandStation*, Station);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTaskCompleted, UTask*, Task, AIslandStation*, Station);
 
 
 
