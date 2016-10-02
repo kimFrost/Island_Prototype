@@ -171,7 +171,7 @@ public:
 	//UPROPERTY(BlueprintAssignable, Category = "Input")
 	FPersonMoveEnded OnPersonMoveEnded;
 
-	//UPROPERTY(BlueprintAssignable, Category = "Input")
+	UPROPERTY(BlueprintAssignable, Category = "Input")
 	FPersonSelected OnPersonSelected;
 
 	UPROPERTY(BlueprintAssignable, Category = "Resources")
