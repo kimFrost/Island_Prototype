@@ -1,0 +1,32 @@
+[
+	{
+		"Id": "MissCat",
+		"Name": "Misses #GenderPossesion cat",
+		"Description": ""
+		"Effect": "-1 happines / 12hr",
+	},
+	{
+		"Id": "DesiresSmoke",
+		"Name": "Craves a smoke",
+		"Description": ""
+		"Effect": "+1 stress / 6hr",
+	},
+	{
+		"Id": "FeelingLonely",
+		"Name": "Felling lonely",
+		"Description": ""
+		"Effect": "+1 stress / 6hr",
+	},
+	{
+		"Id": "Tired",
+		"Name": "Tired",
+		"Description": ""
+		"Effect": "+1 stress / 2hr",
+	},
+	{
+		"Id": "Exhausted",
+		"Name": "Exhausted",
+		"Description": ""
+		"Effect": "+1 stress / 1hr",
+	}
+]
