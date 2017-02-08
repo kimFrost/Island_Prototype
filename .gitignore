@@ -69,6 +69,7 @@ DerivedDataCache/*
 *.swo
 .ctrlp_cache/
 
+ipch/*
 
 #Coherent UI
 Plugins/Runtime/Coherent/CoherentUIPlugin/Intermediate/*
